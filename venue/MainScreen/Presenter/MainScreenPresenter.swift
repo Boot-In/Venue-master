@@ -80,12 +80,6 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             }
         }
         
-        for pu in EventData.shared.publicUsers {
-            ref.child(pu)
-            
-        }
-        
-        
 //        ref = Database.database().reference().child("events")
 //        print("...loadAllEvents>events")
 //        let _ = ref.observe(.value, with: { (snapshot) in //refHandle
