@@ -18,7 +18,7 @@ class AddMarkerScreenViewController: UIViewController {
     
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
-    let iconArray = ["checkmark.circle", "house", "star", "music.note"]
+    let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
     var i = 0
     
     override func viewDidLoad() {
@@ -54,7 +54,7 @@ class AddMarkerScreenViewController: UIViewController {
         let userDefault = UserDefaults.standard
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "niсkNameUser") ?? "без названия")"
         nameEventTF.text = EventData.shared.placeEvent
-        iconEventIV.image = UIImage(systemName: iconArray.last ?? "star")
+        iconEventIV.image = UIImage(named: iconArray[i])
     }
     
     func createDatePicker() {
@@ -89,8 +89,8 @@ class AddMarkerScreenViewController: UIViewController {
     }
     
     @IBAction func changeIconButtonTap() {
-        iconEventIV.image = UIImage(systemName: iconArray[i])
         i += 1
+        iconEventIV.image = UIImage(named: iconArray[i])
         if i == iconArray.count {i = 0}
     }
     
@@ -101,10 +101,10 @@ class AddMarkerScreenViewController: UIViewController {
         guard let name = nameEventTF.text, nameEventTF.text != "" else {
             infoLabel.text = "Не заполнено поле Название" ; return }
         guard let snip = snipetEventTV.text else { return }
-        guard let image = iconEventIV.image else { return }
+        //guard let image = iconEventIV.image else { return }
         infoLabel.textColor = .systemBlue
         infoLabel.text = "Сохраняем ...."
-        presenter.saveEvent(nameEvent: name, iconEvent: image, snipetEvent: snip)
+        presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], snipetEvent: snip)
         infoLabel.text = "Данные успешно сохранены"
     }
     
