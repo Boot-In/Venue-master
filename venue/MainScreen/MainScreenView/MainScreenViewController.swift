@@ -32,7 +32,7 @@ class MainScreenViewController: UIViewController {
         sliderSetup()
         presenter.startLocationService()
         mapViewSetup()
-    
+        presenter.checkUserLoginStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +79,7 @@ class MainScreenViewController: UIViewController {
     }
     
     @IBAction func accountButtonTap() {
-        presenter.checkUserLoginStatus()
+        presenter.tapButtonUser()
         //presenter.goLoginScreen()
     }
     
@@ -106,8 +106,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         mapView.clear()
         presenter.createMarkers()
         isMark = true
-        EventData.shared.coordinateEvent = coordinate
-        EventData.shared.placeEvent = ""
+        DataService.shared.coordinateEvent = coordinate
+        DataService.shared.placeEvent = ""
         marker.map = mapView
     }
     
@@ -123,8 +123,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         infoMarker.position = location
         infoMarker.title = name
         infoMarker.opacity = 0
-        EventData.shared.coordinateEvent = location
-        EventData.shared.placeEvent = name
+        DataService.shared.coordinateEvent = location
+        DataService.shared.placeEvent = name
         //infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker

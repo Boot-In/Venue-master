@@ -54,7 +54,7 @@ class AddMarkerScreenViewController: UIViewController {
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "niсkNameUser") ?? "без названия")"
-        nameEventTF.text = EventData.shared.placeEvent
+        nameEventTF.text = DataService.shared.placeEvent
         iconEventIV.image = UIImage(named: iconArray[i])
     }
     
@@ -78,8 +78,8 @@ class AddMarkerScreenViewController: UIViewController {
         formatter.timeStyle = .none
         
         let dateString = formatter.string(from: picker.date)
-        EventData.shared.dateEvent = picker.date
-        EventData.shared.dataEventString = dateString
+        DataService.shared.dateEvent = picker.date
+        DataService.shared.dataEventString = dateString
         dateEventTF.text = "\(dateString)"
         
         self.view.endEditing(true)
@@ -103,7 +103,7 @@ class AddMarkerScreenViewController: UIViewController {
             infoLabel.text = "Не заполнено поле Название" ; return }
         guard let discr = discriptionEventTV.text else { return }
         //guard let category = categoryEventTF.text else { return }
-        EventData.shared.categoryEvent = categoryEventTF.text ?? ""
+        DataService.shared.categoryEvent = categoryEventTF.text ?? ""
         infoLabel.textColor = .systemBlue
         infoLabel.text = "Сохраняем ...."
         presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)

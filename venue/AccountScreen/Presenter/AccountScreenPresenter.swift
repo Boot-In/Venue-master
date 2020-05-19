@@ -7,6 +7,7 @@
 //
 import Foundation
 import Firebase
+import SwiftyJSON
 
 /// Вывод информации
 protocol AccountScreenProtocol: class {
@@ -18,11 +19,10 @@ protocol AccountScreenPresenterProtocol: class {
     init(view: AccountScreenProtocol, router: AccountScreenRouterProtocol)
     
     func createUser(email: String, password: String, fName: String, sName: String, nik: String)
-  
+    func getProfile() -> Profile
 }
 
 class AccountScreenPresenter: AccountScreenPresenterProtocol {
-    
     let view: AccountScreenProtocol
     let router: AccountScreenRouterProtocol
     
@@ -35,7 +35,11 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         ref = Database.database().reference(withPath: "users")
     }///////////////////////////////////////////////////
    
-    
+    func getProfile() -> Profile {
+        print("...getProfile>")
+        return DataService.shared.localUser
+    }
+       
     
     func getUID() -> String {
         guard let user = Auth.auth().currentUser else { return "No user ID"}
@@ -45,7 +49,8 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         UserDefaults.standard.set(true, forKey: "logined")
         return user.uid
     }
-
+    
+    
     func createUser(email: String, password: String, fName: String, sName: String, nik: String) {
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(password, forKey: "password")
@@ -75,9 +80,9 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         
         UserDefaults.standard.set(true, forKey: "logined")
         
-        let user = User(userID: getUID(), userMail: email, password: password, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
+        let user = Profile(userID: getUID(), userMail: email, password: password, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
         
-        EventData.shared.localUser = user
+        DataService.shared.localUser = user
         
         self.view.sendMessage(text: "Данные сохранены !")
     }

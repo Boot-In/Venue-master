@@ -29,9 +29,21 @@ class AccountScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         infoLabel.textColor = .red
-        checkUserData()
+        //checkUserData()
+        let profile = presenter.getProfile()
+        print("...profile", profile.firstUserName)
+        updateView(profile: profile)
     }
     
+    func updateView(profile: Profile) {
+        print("updateView")
+        nameUserTF.text = profile.firstUserName
+        secondNameUserTF.text = profile.secondNameUser
+        nickNameUserTF.text = profile.niсkNameUser
+        emailTextField.text = profile.userMail
+        passwordTextField.text = profile.password
+        rePasswordTextField.text = profile.password
+    }
     
     func checkUserData() {
         let userDefault = UserDefaults.standard

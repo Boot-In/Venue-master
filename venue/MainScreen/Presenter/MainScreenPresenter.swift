@@ -25,6 +25,7 @@ protocol MainScreenPresenterProtocol: class {
     func goAddMarkerScreen()
     func goLoginScreen()
     func checkUserLoginStatus()
+    func tapButtonUser()
 }
 
 class MainScreenPresenter: MainScreenPresenterProtocol {
@@ -32,7 +33,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     let view: MainScreenProtocol
     let router: MainScreenRouterProtocol
     var ref: DatabaseReference!
-    
+    var user: User?
     
     required init(view: MainScreenProtocol, router: MainScreenRouterProtocol) {
         self.view = view
@@ -45,15 +46,25 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         loadAllEvents()
     }
     
-
-    func checkUserLoginStatus() {
+    func checkUserLoginStatus () {
+        print("...checkUserLoginStatus")
         Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
             if user != nil {
-                self?.router.showAccountScreen()
-            } else {
-                self?.router.showLoginScreen()
+                self?.user = user
+                self?.loadMyProfile(userId: user!.uid)
             }
         })
+    }
+    
+    func tapButtonUser() {
+        //  Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
+        if self.user != nil {
+            print("...user?.uid", user?.uid)
+            self.router.showAccountScreen()
+        } else {
+            self.router.showLoginScreen()
+        }
+        //  })
     }
     
     func goAccountScreen() {   /// удалить позже
@@ -67,44 +78,75 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     func goAddMarkerScreen() {
         router.showAddMarkerScreen()
     }
+    
+    func loadMyProfile (userId: String) {
+         print("loadMyProfile>userId>",userId)
+         ref = Database.database().reference().child("users").child(userId)
+               print("loadMyProfile")
+               let _ = ref.observe(.value, with: { (snapshot) in //refHandle
+                   DataService.shared.events.removeAll()
+                  // for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                       let json = JSON(snapshot.value ?? [])
+                    print("loadMyProfile>json>",json)
+                       //rest.key
+                       let firstUserName = json["firstUserName"].stringValue
+                       let nickNameUser = json["nickNameUser"].stringValue
+                       let secondNameUser = json["secondNameUser"].stringValue
+                       let userMail = json["userMail"].stringValue
+                       let password = json["password"].stringValue
+                       
+                       let profile = Profile(userID: userId, userMail: userMail, password: password, firstUserName: firstUserName, secondNameUser: secondNameUser, niсkNameUser: nickNameUser)
+                     DataService.shared.localUser = profile
+                  // }
 
+               })
+     }
+    
+    
     func loadAllEvents() {
-        ref = Database.database().reference(withPath: "users")
-        EventData.shared.publicUsers.removeAll()
-        ref.observe(.value) { (snapshot) in
-      
-            for uid in snapshot.children.allObjects as! [DataSnapshot] {
-                let publicUser = uid.key
-                EventData.shared.publicUsers.append(publicUser)
-                print("UserID = \(uid.key)")
-            }
-        }
-        
-//        ref = Database.database().reference().child("events")
-//        print("...loadAllEvents>events")
-//        let _ = ref.observe(.value, with: { (snapshot) in //refHandle
-//            EventData.shared.events.removeAll()
-//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-//                let json = JSON(rest.value ?? [])
-//                let nameEvent = json["nameEvent"].stringValue
-//                let lat = json["lat"].doubleValue
-//                let lng = json["lng"].doubleValue
-//                let dateId = json["dateId"].doubleValue
-//                let date = Date().addingTimeInterval(dateId)
-//                let snipetEvent = json["snipetEvent"].stringValue
-//                let coordinateEvent = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-//                let img = UIImage(systemName: "person")!
-//             //   let event = Event(coordinateEvent: coordinateEvent, dateEvent: date, nameEvent: nameEvent, snipetEvent: snipetEvent, iconEvent: img)
-//             //   MarkerData.shared.markers.append(event)
-//            }
+//        ref = Database.database().reference(withPath: "users")
+//        DataService.shared.publicUsers.removeAll()
+//        ref.observe(.value) { (snapshot) in
 //
-//           self.createMarkers()
-//        })
+//            for uid in snapshot.children.allObjects as! [DataSnapshot] {
+//                let publicUser = uid.key
+//                DataService.shared.publicUsers.append(publicUser)
+//                print("UserID = \(uid.key)")
+//            }
+//        }
+        
+        ref = Database.database().reference().child("events")
+        print("...loadAllEvents>events")
+        let _ = ref.observe(.value, with: { (snapshot) in //refHandle
+            DataService.shared.events.removeAll()
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let json = JSON(rest.value ?? [])
+                //rest.key
+                let dateEventString = json["dateEventString"].stringValue
+                let dateEventTI = json["dateEventTI"].doubleValue
+                let discriptionEvent = json["discriptionEvent"].stringValue
+                let iconEvent = json["iconEvent"].stringValue
+                let lifeTimeEvent = json["lifeTimeEvent"].doubleValue
+                let lngEvent = json["lngEvent"].doubleValue
+                let latEvent = json["latEvent"].doubleValue
+                let nameEvent = json["nameEvent"].stringValue
+                let snipetEvent = json["snipetEvent"].stringValue
+                let userID = json["userID"].stringValue
+                
+                let coordinateEvent = CLLocationCoordinate2D(latitude: latEvent, longitude: lngEvent)
+                let date = Date().addingTimeInterval(dateEventTI)
+
+                let event = Event(userID: userID, nameEvent: nameEvent, coordinate: coordinateEvent, date: date)
+                DataService.shared.events.append(event)
+            }
+
+           self.createMarkers()
+        })
     }
     
     func createMarkers() {
         var markers: [GMSMarker] = []
-        let events = EventData.shared.events
+        let events = DataService.shared.events
         
         for event in events {
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent) )

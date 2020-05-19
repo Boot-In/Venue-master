@@ -49,7 +49,7 @@ struct Event {
     
 }
 
-struct User {
+struct Profile {
     let userID: String
     let userMail: String
     let password: String
@@ -74,15 +74,3 @@ struct User {
 //    }
 //}
 
-class EventData {
-    static let shared = EventData()
-    var coordinateEvent = CLLocationCoordinate2D()
-    var placeEvent = String()
-    var dateEvent = Date()
-    var dataEventString = String()
-    var categoryEvent = String()
-    var events = [Event]()
-    
-    var localUser: User!
-    var publicUsers = [String]()
-}

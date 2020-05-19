@@ -30,6 +30,7 @@
 		1BECD6FB246799100000A0C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BECD6FA246799100000A0C6 /* Assets.xcassets */; };
 		1BECD6FE246799100000A0C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BECD6FC246799100000A0C6 /* LaunchScreen.storyboard */; };
 		1BECD70A24679D490000A0C6 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECD70924679D490000A0C6 /* LocationService.swift */; };
+		8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE056A12473FE3B00D94CCC /* DataService.swift */; };
 		8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */; };
 		ADFA0E2C23AEF3D819F393E1 /* Pods_venue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6416475AA159C63D9D3B08E /* Pods_venue.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		1BECD6FD246799100000A0C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BECD6FF246799100000A0C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BECD70924679D490000A0C6 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		8BE056A12473FE3B00D94CCC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A46DD4D347AF479F222570F1 /* Pods-venue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-venue.release.xcconfig"; path = "Target Support Files/Pods-venue/Pods-venue.release.xcconfig"; sourceTree = "<group>"; };
 		A6416475AA159C63D9D3B08E /* Pods_venue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_venue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,8 +239,9 @@
 		1BECD6F02467990C0000A0C6 /* venue */ = {
 			isa = PBXGroup;
 			children = (
-				1B4844FC24713C1000836FB5 /* LoginScreen */,
+				8BE056A02473FDFE00D94CCC /* Models */,
 				1BECD70824679D1F0000A0C6 /* Services */,
+				1B4844FC24713C1000836FB5 /* LoginScreen */,
 				1BECD7052467994B0000A0C6 /* SupportFiles */,
 				1B01EC7E2468D3B900FA52F1 /* AccountScreen */,
 				1BECD706246799750000A0C6 /* MainScreen */,
@@ -285,8 +288,16 @@
 			isa = PBXGroup;
 			children = (
 				1BECD70924679D490000A0C6 /* LocationService.swift */,
+				8BE056A12473FE3B00D94CCC /* DataService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8BE056A02473FDFE00D94CCC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +446,7 @@
 				1B48450524713CA500836FB5 /* LoginScreenPresenter.swift in Sources */,
 				1BECD6F22467990C0000A0C6 /* AppDelegate.swift in Sources */,
 				1B8E09FC246942BA001C5E01 /* AddMarkerScreenRouter.swift in Sources */,
+				8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */,
 				1B48450224713C8700836FB5 /* LoginScreenViewController.swift in Sources */,
 				1BE688D12467E0F100F641F2 /* MainScreenPresenter.swift in Sources */,
 				1B5B7022246826A7004CA039 /* Models.swift in Sources */,
@@ -588,9 +600,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G64Y8SWWLR;
+				DEVELOPMENT_TEAM = 4RU923WJZQ;
 				INFOPLIST_FILE = venue/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,9 +620,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G64Y8SWWLR;
+				DEVELOPMENT_TEAM = 4RU923WJZQ;
 				INFOPLIST_FILE = venue/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
