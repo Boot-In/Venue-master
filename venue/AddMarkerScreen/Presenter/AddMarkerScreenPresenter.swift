@@ -41,6 +41,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.dateEventString = EventData.shared.dataEventString
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
+        event.snipetEvent = EventData.shared.categoryEvent
         EventData.shared.events.append(event)
         /// Сохранение
         

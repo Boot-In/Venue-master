@@ -80,6 +80,7 @@ class EventData {
     var placeEvent = String()
     var dateEvent = Date()
     var dataEventString = String()
+    var categoryEvent = String()
     var events = [Event]()
     
     var localUser: User!

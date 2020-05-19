@@ -102,7 +102,8 @@ class AddMarkerScreenViewController: UIViewController {
         guard let name = nameEventTF.text, nameEventTF.text != "" else {
             infoLabel.text = "Не заполнено поле Название" ; return }
         guard let discr = discriptionEventTV.text else { return }
-        //guard let image = iconEventIV.image else { return }
+        guard let category = categoryEventTF.text else { return }
+        EventData.shared.categoryEvent = category
         infoLabel.textColor = .systemBlue
         infoLabel.text = "Сохраняем ...."
         presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
