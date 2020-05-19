@@ -22,9 +22,9 @@ final class LoginScreenRouter: LoginScreenRouterProtocol {
     
 func showAccountScreen() {
     let accountScreenVC = ModuleBulder.accountScreen()
-    //view?.navigationController?.pushViewController(accountScreenVC, animated: true)
-    accountScreenVC.modalPresentationStyle = .fullScreen
-    view?.present(accountScreenVC, animated: true)
+    view?.navigationController?.pushViewController(accountScreenVC, animated: true)
+   // accountScreenVC.modalPresentationStyle = .fullScreen
+   // view?.present(accountScreenVC, animated: true)
 }
     
    

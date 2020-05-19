@@ -25,9 +25,9 @@ class LoginScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        if UserDefaults.standard.bool(forKey: "logined") {
-            self.dismiss(animated: false)
-        }
+//        if UserDefaults.standard.bool(forKey: "logined") {
+//            self.dismiss(animated: false)
+//        }
     }
     
     func displayWarningLabel(withText text: String) {

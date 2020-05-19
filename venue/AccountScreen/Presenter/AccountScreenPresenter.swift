@@ -19,7 +19,7 @@ protocol AccountScreenPresenterProtocol: class {
     init(view: AccountScreenProtocol, router: AccountScreenRouterProtocol)
     
     func createUser(email: String, password: String, fName: String, sName: String, nik: String)
-    func getProfile() -> Profile
+    func getProfile() -> Profile?
 }
 
 class AccountScreenPresenter: AccountScreenPresenterProtocol {
@@ -35,7 +35,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         ref = Database.database().reference(withPath: "users")
     }///////////////////////////////////////////////////
    
-    func getProfile() -> Profile {
+    func getProfile() -> Profile? {
         print("...getProfile>")
         return DataService.shared.localUser
     }

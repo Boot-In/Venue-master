@@ -30,9 +30,11 @@ class AccountScreenViewController: UIViewController {
         super.viewDidLoad()
         infoLabel.textColor = .red
         //checkUserData()
-        let profile = presenter.getProfile()
-        print("...profile", profile.firstUserName)
-        updateView(profile: profile)
+        if let profile = presenter.getProfile() {
+            print("...profile", profile.firstUserName)
+            updateView(profile: profile)
+        }
+       
     }
     
     func updateView(profile: Profile) {

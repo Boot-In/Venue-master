@@ -5,6 +5,7 @@
 //  Created by Dmitriy Butin on 10.05.2020.
 //  Copyright © 2020 Dmitriy Butin. All rights reserved.
 //
+import UIKit
 
 protocol MainScreenRouterProtocol: class {
     func showAccountScreen()
@@ -23,9 +24,9 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func showAccountScreen() {
         let accountScreenVC = ModuleBulder.accountScreen()
-       // view?.navigationController?.pushViewController(accountScreenVC, animated: true)
-        accountScreenVC.modalPresentationStyle = .fullScreen
-        view?.navigationController?.present(accountScreenVC, animated: true)
+      //  view?.navigationController?.pushViewController(accountScreenVC, animated: true)
+         accountScreenVC.modalPresentationStyle = .fullScreen
+         view?.navigationController?.present(accountScreenVC, animated: true)
     }
     
     func showAddMarkerScreen() {
@@ -37,7 +38,9 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     func showLoginScreen() {
         let loginScreenVC = ModuleBulder.addLoginScreen()
         loginScreenVC.modalPresentationStyle = .fullScreen
-        view?.navigationController?.present(loginScreenVC, animated: true)
+        
+        let nc = UINavigationController(rootViewController: loginScreenVC)
+        view?.navigationController?.present(nc, animated: true)
         //view?.navigationController?.pushViewController(loginScreenVC, animated: true)
     }
     
