@@ -9,11 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddMarkerScreenViewController" customModule="venue" customModuleProvider="target">
             <connections>
+                <outlet property="categoryEventTF" destination="XJW-99-0vJ" id="RJi-pp-ccs"/>
                 <outlet property="dateEventTF" destination="uUw-vI-ZAZ" id="yoH-nJ-Cis"/>
+                <outlet property="discriptionEventTV" destination="23m-4p-2kf" id="2ZP-e2-kwk"/>
                 <outlet property="iconEventIV" destination="suK-OO-sDV" id="NzE-Yy-tRU"/>
                 <outlet property="infoLabel" destination="HVg-38-HJQ" id="84U-bh-H5S"/>
                 <outlet property="nameEventTF" destination="zkR-pD-uaC" id="lZy-Tl-X3r"/>
-                <outlet property="snipetEventTV" destination="23m-4p-2kf" id="2ZP-e2-kwk"/>
                 <outlet property="userNickLabel" destination="atO-Bk-woG" id="DGo-OM-j8E"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -49,7 +50,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e4q-xu-DIN">
-                    <rect key="frame" x="10" y="20" width="355" height="406.5"/>
+                    <rect key="frame" x="10" y="20" width="355" height="460.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация о мероприятии" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="WRF-Ix-4hG">
                             <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
@@ -88,7 +89,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zkR-pD-uaC">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="обязательное поле" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zkR-pD-uaC">
                                     <rect key="frame" x="117" y="0.0" width="238" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no"/>
@@ -98,8 +99,27 @@
                                 </textField>
                             </subviews>
                         </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="tn6-uL-Y4O">
+                            <rect key="frame" x="0.0" y="193.5" width="355" height="34"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Категория:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heY-WA-bak">
+                                    <rect key="frame" x="0.0" y="0.0" width="92.5" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="опционально" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XJW-99-0vJ">
+                                    <rect key="frame" x="122.5" y="0.0" width="232.5" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="jet-3d-qn3"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                        </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hb3-vc-Dok">
-                            <rect key="frame" x="0.0" y="193.5" width="355" height="30"/>
+                            <rect key="frame" x="0.0" y="247.5" width="355" height="30"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="suK-OO-sDV">
                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -139,13 +159,13 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Краткое описание мероприятия:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf6-iv-En0">
-                            <rect key="frame" x="0.0" y="243.5" width="355" height="21.5"/>
+                            <rect key="frame" x="0.0" y="297.5" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23m-4p-2kf">
-                            <rect key="frame" x="0.0" y="285" width="355" height="80"/>
+                            <rect key="frame" x="0.0" y="339" width="355" height="80"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="9cH-cQ-7BL"/>
@@ -158,7 +178,7 @@
                             </connections>
                         </textView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVg-38-HJQ">
-                            <rect key="frame" x="0.0" y="385" width="355" height="21.5"/>
+                            <rect key="frame" x="0.0" y="439" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                             <color key="textColor" red="0.002888324389" green="0.054154038940000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>

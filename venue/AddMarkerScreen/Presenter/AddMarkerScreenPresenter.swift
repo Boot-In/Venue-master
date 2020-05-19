@@ -18,7 +18,7 @@ protocol AddMarkerScreenProtocol: class {
 // это как мы принимаем информацию
 protocol AddMarkerScreenPresenterProtocol: class {
     init(view: AddMarkerScreenProtocol, router: AddMarkerScreenRouterProtocol)
-    func saveEvent(nameEvent: String, iconEvent: String, snipetEvent: String)
+    func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String)
 }
 
 class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
@@ -33,13 +33,14 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         ref = Database.database().reference(withPath: "users")
     }///////////////////////////////////////////////////
    
-    func saveEvent(nameEvent: String, iconEvent: String, snipetEvent: String) {
+    func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String) {
         let coordinate = EventData.shared.coordinateEvent
         let date = EventData.shared.dateEvent
         guard let user = Auth.auth().currentUser else { return }
         var event = Event(userID: user.uid, nameEvent: nameEvent, coordinate: coordinate, date: date)
         event.dateEventString = EventData.shared.dataEventString
         event.iconEvent = iconEvent
+        event.discriptionEvent = discrEvent
         EventData.shared.events.append(event)
         /// Сохранение
         

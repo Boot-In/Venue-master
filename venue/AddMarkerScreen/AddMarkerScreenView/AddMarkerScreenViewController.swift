@@ -12,7 +12,8 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var userNickLabel: UILabel!
     @IBOutlet weak var dateEventTF: UITextField!
     @IBOutlet weak var nameEventTF: UITextField!
-    @IBOutlet weak var snipetEventTV: UITextView!
+    @IBOutlet weak var categoryEventTF: UITextField! // задействовать с таблицей категорий
+    @IBOutlet weak var discriptionEventTV: UITextView!
     @IBOutlet weak var iconEventIV: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
     
@@ -90,8 +91,8 @@ class AddMarkerScreenViewController: UIViewController {
     
     @IBAction func changeIconButtonTap() {
         i += 1
-        iconEventIV.image = UIImage(named: iconArray[i])
         if i == iconArray.count {i = 0}
+        iconEventIV.image = UIImage(named: iconArray[i])
     }
     
     
@@ -100,11 +101,11 @@ class AddMarkerScreenViewController: UIViewController {
             infoLabel.text = "Не заполнено поле Дата" ; return }
         guard let name = nameEventTF.text, nameEventTF.text != "" else {
             infoLabel.text = "Не заполнено поле Название" ; return }
-        guard let snip = snipetEventTV.text else { return }
+        guard let discr = discriptionEventTV.text else { return }
         //guard let image = iconEventIV.image else { return }
         infoLabel.textColor = .systemBlue
         infoLabel.text = "Сохраняем ...."
-        presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], snipetEvent: snip)
+        presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
         infoLabel.text = "Данные успешно сохранены"
     }
     
