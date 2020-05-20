@@ -20,6 +20,7 @@ protocol AccountScreenPresenterProtocol: class {
     
     func createUser(email: String, password: String, fName: String, sName: String, nik: String)
     func getProfile() -> Profile?
+    func clearLocalUserData()
 }
 
 class AccountScreenPresenter: AccountScreenPresenterProtocol {
@@ -39,8 +40,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         print("...getProfile>")
         return DataService.shared.localUser
     }
-       
-    
+           
     func getUID() -> String {
         guard let user = Auth.auth().currentUser else { return "No user ID"}
         print("UserID = \(user.uid)")
@@ -50,19 +50,27 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         return user.uid
     }
     
+    func clearLocalUserData() {
+        UserDefaults.standard.set(false, forKey: "logined")
+        UserDefaults.standard.set("", forKey: "email")
+        UserDefaults.standard.set("", forKey: "password")
+        UserDefaults.standard.set("", forKey: "nameUser")
+        UserDefaults.standard.set("", forKey: "secondNameUser")
+        UserDefaults.standard.set("", forKey: "nickNameUser")
+    }
     
     func createUser(email: String, password: String, fName: String, sName: String, nik: String) {
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(password, forKey: "password")
         UserDefaults.standard.set(fName, forKey: "nameUser")
         UserDefaults.standard.set(sName, forKey: "secondNameUser")
-        UserDefaults.standard.set(nik, forKey: "niсkNameUser")
+        UserDefaults.standard.set(nik, forKey: "nickNameUser")
         
         Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] (user, error) in
             
             guard error == nil, user != nil else {
                 print(error!.localizedDescription)
-                self?.view.sendMessage(text: "Ошибка... Проверьте данные")
+                self?.view.sendMessage(text: error!.localizedDescription)
                 return
             }
             
@@ -73,7 +81,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
                 "password" : password,
                 "firstUserName" : fName,
                 "secondNameUser" : sName,
-                "niсkNameUser": nik
+                "nickNameUser": nik
             ])
             
         })
@@ -81,11 +89,9 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         UserDefaults.standard.set(true, forKey: "logined")
         
         let user = Profile(userID: getUID(), userMail: email, password: password, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
-        
+        print("Пользователь \(user.userID) успешно создан !")
         DataService.shared.localUser = user
-        
         self.view.sendMessage(text: "Данные сохранены !")
     }
 
-    
 }

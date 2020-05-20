@@ -16,6 +16,7 @@
                 <outlet property="nickNameUserTF" destination="TTO-SQ-XOW" id="PnK-F5-65o"/>
                 <outlet property="passwordTextField" destination="nzy-8e-LEa" id="NXG-Az-dTv"/>
                 <outlet property="rePasswordTextField" destination="dGr-Zj-NhA" id="8Qw-fh-8F6"/>
+                <outlet property="saveButton" destination="MYI-0f-J2g" id="rgg-ct-kOB"/>
                 <outlet property="secondNameUserTF" destination="jSf-7G-81m" id="eTV-k1-9Km"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nhk-U2-3rJ">
-                    <rect key="frame" x="20" y="30" width="335" height="444.5"/>
+                    <rect key="frame" x="20" y="30" width="335" height="424"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lt5-JB-zN2">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -161,14 +162,14 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Служебная информация" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-uB-JJe">
-                            <rect key="frame" x="0.0" y="374" width="335" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-uB-JJe">
+                            <rect key="frame" x="0.0" y="374" width="335" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                             <color key="textColor" red="0.002888324389" green="0.054154038940000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="PZl-1K-rmR">
-                            <rect key="frame" x="0.0" y="414.5" width="335" height="30"/>
+                            <rect key="frame" x="0.0" y="394" width="335" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-Xb-awx">
                                     <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
@@ -201,14 +202,6 @@
                         <constraint firstItem="jSf-7G-81m" firstAttribute="width" secondItem="K1r-Zc-hIe" secondAttribute="width" id="l6s-UZ-I54"/>
                     </constraints>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miS-Jg-Sol">
-                    <rect key="frame" x="161" y="544" width="52" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Unwind"/>
-                    <connections>
-                        <action selector="unwindToMain:" destination="-2" eventType="touchUpInside" id="RSD-n6-obC"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.7606702900062009" green="0.8459115832463282" blue="0.98154765369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

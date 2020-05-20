@@ -59,7 +59,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     func tapButtonUser() {
         //  Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
         if self.user != nil {
-            print("...user?.uid", user?.uid)
+            print("...user?.uid", user?.uid ?? "")
             self.router.showAccountScreen()
         } else {
             self.router.showLoginScreen()
@@ -80,40 +80,30 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     func loadMyProfile (userId: String) {
-         print("loadMyProfile>userId>",userId)
-         ref = Database.database().reference().child("users").child(userId)
-               print("loadMyProfile")
-               let _ = ref.observe(.value, with: { (snapshot) in //refHandle
-                   DataService.shared.events.removeAll()
-                  // for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                       let json = JSON(snapshot.value ?? [])
-                    print("loadMyProfile>json>",json)
-                       //rest.key
-                       let firstUserName = json["firstUserName"].stringValue
-                       let nickNameUser = json["nickNameUser"].stringValue
-                       let secondNameUser = json["secondNameUser"].stringValue
-                       let userMail = json["userMail"].stringValue
-                       let password = json["password"].stringValue
-                       
-                       let profile = Profile(userID: userId, userMail: userMail, password: password, firstUserName: firstUserName, secondNameUser: secondNameUser, niсkNameUser: nickNameUser)
-                     DataService.shared.localUser = profile
-                  // }
-
-               })
-     }
+        print("loadMyProfile>userId>",userId)
+        ref = Database.database().reference().child("users").child(userId)
+        print("loadMyProfile")
+        let _ = ref.observe(.value, with: { (snapshot) in //refHandle
+            DataService.shared.events.removeAll()
+            
+            let json = JSON(snapshot.value ?? [])
+            print("loadMyProfile>json>",json)
+           
+            let firstUserName = json["firstUserName"].stringValue
+            let nickNameUser = json["nickNameUser"].stringValue
+            let secondNameUser = json["secondNameUser"].stringValue
+            let userMail = json["userMail"].stringValue
+            let password = json["password"].stringValue
+            
+            let profile = Profile(userID: userId, userMail: userMail, password: password, firstUserName: firstUserName, secondNameUser: secondNameUser, niсkNameUser: nickNameUser)
+            DataService.shared.localUser = profile
+            UserDefaults.standard.set(nickNameUser, forKey: "nickNameUser")
+            
+        })
+    }
     
     
     func loadAllEvents() {
-//        ref = Database.database().reference(withPath: "users")
-//        DataService.shared.publicUsers.removeAll()
-//        ref.observe(.value) { (snapshot) in
-//
-//            for uid in snapshot.children.allObjects as! [DataSnapshot] {
-//                let publicUser = uid.key
-//                DataService.shared.publicUsers.append(publicUser)
-//                print("UserID = \(uid.key)")
-//            }
-//        }
         
         ref = Database.database().reference().child("events")
         print("...loadAllEvents>events")
@@ -135,12 +125,18 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 
                 let coordinateEvent = CLLocationCoordinate2D(latitude: latEvent, longitude: lngEvent)
                 let date = Date().addingTimeInterval(dateEventTI)
-
-                let event = Event(userID: userID, nameEvent: nameEvent, coordinate: coordinateEvent, date: date)
+                
+                var event = Event(userID: userID, nameEvent: nameEvent, coordinate: coordinateEvent, date: date)
+                event.dateEventString = dateEventString
+                event.discriptionEvent = discriptionEvent
+                event.iconEvent = iconEvent
+                event.lifeTimeEvent = lifeTimeEvent
+                event.snipetEvent = snipetEvent
+                
                 DataService.shared.events.append(event)
             }
-
-           self.createMarkers()
+            
+            self.createMarkers()
         })
     }
     
@@ -151,8 +147,8 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         for event in events {
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent) )
             marker.icon = UIImage(named: event.iconEvent)
-            marker.title = event.nameEvent
-            marker.snippet = event.dateEventString
+            marker.title = "\(event.dateEventString) \(event.nameEvent)"
+            marker.snippet = event.snipetEvent
             markers.append(marker)
         }
     

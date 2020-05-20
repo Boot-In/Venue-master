@@ -94,6 +94,7 @@ class MainScreenViewController: UIViewController {
             }
         } else {
             presenter.goAccountScreen()
+            // убрать активность кнопки
         }
     }
     

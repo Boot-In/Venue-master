@@ -19,6 +19,7 @@ class LoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         warnLabel.textColor = .red
         warnLabel.alpha = 0
     }
@@ -45,13 +46,12 @@ class LoginScreenViewController: UIViewController {
             return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             if error != nil {
-                self?.displayWarningLabel(withText: "Пользователь не зарегистрирован")
+                self?.displayWarningLabel(withText: error?.localizedDescription ?? "Error")
                 return
             }
             
             if user != nil {
-                //self?.navigationController?.popToRootViewController(animated: true)
-                //return
+                // загрузка данных пользователя
                 UserDefaults.standard.set(true, forKey: "logined")
                 self?.dismiss(animated: true)
             }

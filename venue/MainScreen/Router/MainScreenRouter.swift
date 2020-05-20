@@ -37,9 +37,9 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func showLoginScreen() {
         let loginScreenVC = ModuleBulder.addLoginScreen()
-        loginScreenVC.modalPresentationStyle = .fullScreen
         
         let nc = UINavigationController(rootViewController: loginScreenVC)
+        nc.modalPresentationStyle = .fullScreen
         view?.navigationController?.present(nc, animated: true)
         //view?.navigationController?.pushViewController(loginScreenVC, animated: true)
     }

@@ -16,6 +16,7 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var discriptionEventTV: UITextView!
     @IBOutlet weak var iconEventIV: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
@@ -24,7 +25,7 @@ class AddMarkerScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        saveButton.isHidden = false
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .red
         loadDataForTextField()
@@ -53,7 +54,7 @@ class AddMarkerScreenViewController: UIViewController {
     
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
-        userNickLabel.text = "Организатор: \(userDefault.string(forKey: "niсkNameUser") ?? "без названия")"
+        userNickLabel.text = "Организатор: \(userDefault.string(forKey: "nickNameUser") ?? "без названия")"
         nameEventTF.text = DataService.shared.placeEvent
         iconEventIV.image = UIImage(named: iconArray[i])
     }
@@ -108,6 +109,7 @@ class AddMarkerScreenViewController: UIViewController {
         infoLabel.text = "Сохраняем ...."
         presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
         infoLabel.text = "Данные успешно сохранены"
+        saveButton.isHidden = true
     }
     
     

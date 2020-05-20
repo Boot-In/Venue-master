@@ -12,7 +12,7 @@ import Firebase
 struct Event {
     let userID: String
     let nameEvent: String
-    let ref: DatabaseReference?
+    //let ref: DatabaseReference?
     let latEvent: Double
     let lngEvent: Double
     let dateEventTI: Double
@@ -23,20 +23,20 @@ struct Event {
     var lifeTimeEvent: Double = 1
     var folowEventUsers: [String] = []
     
-    init(snapshot: DataSnapshot) {
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        userID = snapshotValue["userID"] as! String
-        nameEvent = snapshotValue["nameEvent"] as! String
-        latEvent = snapshotValue["latEvent"] as! Double
-        lngEvent = snapshotValue["lngEvent"] as! Double
-        dateEventString = snapshotValue["dateEventString"] as! String
-        dateEventTI = snapshotValue["dateEventTI"] as! Double
-        snipetEvent = snapshotValue["snipetEvent"] as! String
-        discriptionEvent = snapshotValue["discriptionEvent"] as! String
-        iconEvent = snapshotValue["iconEvent"] as! String
-        lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
-        ref = snapshot.ref
-    }
+//    init(snapshot: DataSnapshot) {
+//        let snapshotValue = snapshot.value as! [String: AnyObject]
+//        userID = snapshotValue["userID"] as! String
+//        nameEvent = snapshotValue["nameEvent"] as! String
+//        latEvent = snapshotValue["latEvent"] as! Double
+//        lngEvent = snapshotValue["lngEvent"] as! Double
+//        dateEventString = snapshotValue["dateEventString"] as! String
+//        dateEventTI = snapshotValue["dateEventTI"] as! Double
+//        snipetEvent = snapshotValue["snipetEvent"] as! String
+//        discriptionEvent = snapshotValue["discriptionEvent"] as! String
+//        iconEvent = snapshotValue["iconEvent"] as! String
+//        lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
+//        ref = snapshot.ref
+//    }
     
     init(userID: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
         self.userID = userID
@@ -44,7 +44,7 @@ struct Event {
         self.latEvent = coordinate.latitude
         self.lngEvent = coordinate.longitude
         self.dateEventTI = date.timeIntervalSince1970
-        ref = nil
+       // ref = nil
     }
     
 }

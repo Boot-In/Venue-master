@@ -18,6 +18,7 @@ protocol AddMarkerScreenProtocol: class {
 // это как мы принимаем информацию
 protocol AddMarkerScreenPresenterProtocol: class {
     init(view: AddMarkerScreenProtocol, router: AddMarkerScreenRouterProtocol)
+    
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String)
 }
 

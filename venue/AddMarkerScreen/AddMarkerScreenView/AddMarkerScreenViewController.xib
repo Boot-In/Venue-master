@@ -15,6 +15,7 @@
                 <outlet property="iconEventIV" destination="suK-OO-sDV" id="NzE-Yy-tRU"/>
                 <outlet property="infoLabel" destination="HVg-38-HJQ" id="84U-bh-H5S"/>
                 <outlet property="nameEventTF" destination="zkR-pD-uaC" id="lZy-Tl-X3r"/>
+                <outlet property="saveButton" destination="xbP-tY-21p" id="Ddf-Mw-jRx"/>
                 <outlet property="userNickLabel" destination="atO-Bk-woG" id="DGo-OM-j8E"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -13,7 +13,7 @@ class AccountScreenViewController: UIViewController {
     
     var presenter: AccountScreenPresenterProtocol!
     
-    let picker = UIDatePicker()
+    // let picker = UIDatePicker()
     // let calendar = Calendar.current
     
     @IBOutlet weak var nameUserTF: UITextField!
@@ -25,95 +25,66 @@ class AccountScreenViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rePasswordTextField: UITextField!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableTF()
+        logOutButton.isHidden = true
         infoLabel.textColor = .red
-        //checkUserData()
+        saveButton.isHidden = false
         if let profile = presenter.getProfile() {
             print("...profile", profile.firstUserName)
-            updateView(profile: profile)
+            updateProfileInfo(profile: profile)
+            disableTF()
         }
-       
     }
     
-    func updateView(profile: Profile) {
-        print("updateView")
+    func updateProfileInfo(profile: Profile) {
+        print("updateProfileInfo")
         nameUserTF.text = profile.firstUserName
         secondNameUserTF.text = profile.secondNameUser
         nickNameUserTF.text = profile.niсkNameUser
         emailTextField.text = profile.userMail
         passwordTextField.text = profile.password
         rePasswordTextField.text = profile.password
+        logOutButton.isHidden = false
+        infoLabel.text = ""
+        saveButton.isHidden = true
     }
     
-    func checkUserData() {
-        let userDefault = UserDefaults.standard
-        if userDefault.bool(forKey: "logined") {
-            logOutButton.isHidden = false
-            nameUserTF.text = userDefault.string(forKey: "nameUser")
-            secondNameUserTF.text = userDefault.string(forKey: "secondNameUser")
-            nickNameUserTF.text = userDefault.string(forKey: "niсkNameUser")
-            emailTextField.text = userDefault.string(forKey: "email")
-            passwordTextField.text = userDefault.string(forKey: "password")
-            rePasswordTextField.text = userDefault.string(forKey: "password")
-            infoLabel.text = "Данные сохранены !"
-        } else {
-            logOutButton.isHidden = true
-            infoLabel.text = "Заполните все поля"
-        }
+    func disableTF() {
+        emailTextField.isEnabled = false
+        passwordTextField.isEnabled = false
+        rePasswordTextField.isEnabled = false
+        nameUserTF.isEnabled = false
+        secondNameUserTF.isEnabled = false
+        nickNameUserTF.isEnabled = false
     }
     
-//    func createDatePicker() {
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        let done = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector(donePressed))
-//        toolbar.setItems([done], animated: true)
-//
-//        dobUserTF.inputAccessoryView = toolbar // вызов тулбара
-//        dobUserTF.inputView = picker
-//        picker.datePickerMode = .date
-//        picker.locale = .init(identifier: "Russian")
-//    }
-
-//    @objc func donePressed() {
-//        let formatter = DateFormatter()
-//        formatter.locale = .init(identifier: "Russian")
-//        formatter.dateStyle = .short
-//        formatter.timeStyle = .none
-//
-//       // myDate = calendar.component(.day, from: picker.date)
-//       // myMonth = calendar.component(.month, from: picker.date)
-//      //  myYear = calendar.component(.year, from: picker.date)
-//      //  print(myDate, myMonth, myYear)
-//        UserData.shared.dateOB = picker.date
-//        let dateString = formatter.string(from: picker.date)
-//        UserData.shared.dateOBString = dateString
-//        dobUserTF.text = "\(dateString)"
-//
-//        self.view.endEditing(true)
-//    }
+    func enableTF() {
+         emailTextField.isEnabled = true
+         passwordTextField.isEnabled = true
+         rePasswordTextField.isEnabled = true
+         nameUserTF.isEnabled = true
+         secondNameUserTF.isEnabled = true
+         nickNameUserTF.isEnabled = true
+     }
     
     @IBAction func closeWindow() {
-        //   guard let navigationController = self.navigationController else { return }
-        //   var navigationArray = navigationController.viewControllers
-        //   navigationArray.remove(at: 1)
-        //   self.navigationController?.viewControllers = navigationArray
-        //   navigationController.popViewController(animated: true)
-        //navigationController?.popToRootViewController(animated: true)
         dismiss(animated: false)
     }
     
     @IBAction func logOut() {
         do {
             try Auth.auth().signOut()
+            print("Log Out")
         } catch {
             print(error.localizedDescription)
+            infoLabel.text = error.localizedDescription
         }
-        UserDefaults.standard.set(false, forKey: "logined")
+        presenter.clearLocalUserData()
         self.dismiss(animated: true)
-        //navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func saveButtonTap() {
@@ -127,15 +98,12 @@ class AccountScreenViewController: UIViewController {
         guard let email = emailTextField.text, emailTextField.text != "" else {
             infoLabel.text = "Не заполнено поле E-mail" ; return
         }
-        
         guard let password = passwordTextField.text, passwordTextField.text != "" else {
             infoLabel.text = "Не заполнено поле Password" ; return
         }
-       
         if password.count < 6 {
             infoLabel.text = "Пароли менее 6-ти символов !"; return
         }
-        
         if passwordTextField.text != rePasswordTextField.text {
             infoLabel.text = "Пароли не совпадают" ; return
         }
@@ -143,9 +111,11 @@ class AccountScreenViewController: UIViewController {
         infoLabel.text = "Подождите....."
         
         presenter.createUser(email: email, password: password, fName: firstUN, sName: secondUN, nik: nickUN)
+        
+        logOutButton.isHidden = false
+        saveButton.isHidden = true
+        disableTF()
     }
-    
-    
     
 }
 
@@ -154,9 +124,7 @@ extension AccountScreenViewController: AccountScreenProtocol {
     
     func sendMessage(text: String) {
         infoLabel.text = text
-        checkUserData()
     }
-
     
 }
 
