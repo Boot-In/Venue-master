@@ -15,6 +15,10 @@
 		1B48450324713C8700836FB5 /* LoginScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B48450124713C8700836FB5 /* LoginScreenViewController.xib */; };
 		1B48450524713CA500836FB5 /* LoginScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48450424713CA500836FB5 /* LoginScreenPresenter.swift */; };
 		1B48450724713CB300836FB5 /* LoginScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48450624713CB300836FB5 /* LoginScreenRouter.swift */; };
+		1B4EB4AB247610CC002BA2C8 /* EventScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4A9247610CC002BA2C8 /* EventScreenViewController.swift */; };
+		1B4EB4AC247610CC002BA2C8 /* EventScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AA247610CC002BA2C8 /* EventScreenViewController.xib */; };
+		1B4EB4AE2476111D002BA2C8 /* EventScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */; };
+		1B4EB4B024761175002BA2C8 /* EventScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */; };
 		1B5B7022246826A7004CA039 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7021246826A7004CA039 /* Models.swift */; };
 		1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */; };
 		1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */; };
@@ -44,6 +48,10 @@
 		1B48450124713C8700836FB5 /* LoginScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginScreenViewController.xib; sourceTree = "<group>"; };
 		1B48450424713CA500836FB5 /* LoginScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenPresenter.swift; sourceTree = "<group>"; };
 		1B48450624713CB300836FB5 /* LoginScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenRouter.swift; sourceTree = "<group>"; };
+		1B4EB4A9247610CC002BA2C8 /* EventScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenViewController.swift; sourceTree = "<group>"; };
+		1B4EB4AA247610CC002BA2C8 /* EventScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventScreenViewController.xib; sourceTree = "<group>"; };
+		1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenPresenter.swift; sourceTree = "<group>"; };
+		1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenRouter.swift; sourceTree = "<group>"; };
 		1B5B7021246826A7004CA039 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenViewController.swift; sourceTree = "<group>"; };
 		1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMarkerScreenViewController.xib; sourceTree = "<group>"; };
@@ -202,6 +210,41 @@
 			path = AddMarkerScreenView;
 			sourceTree = "<group>";
 		};
+		1BC3C00124752FFB00A2F775 /* EventScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1BC3C0042475304600A2F775 /* EventScreenView */,
+				1BC3C0032475302900A2F775 /* Presenter */,
+				1BC3C0022475300E00A2F775 /* Router */,
+			);
+			path = EventScreen;
+			sourceTree = "<group>";
+		};
+		1BC3C0022475300E00A2F775 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		1BC3C0032475302900A2F775 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1BC3C0042475304600A2F775 /* EventScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				1B4EB4A9247610CC002BA2C8 /* EventScreenViewController.swift */,
+				1B4EB4AA247610CC002BA2C8 /* EventScreenViewController.xib */,
+			);
+			path = EventScreenView;
+			sourceTree = "<group>";
+		};
 		1BE688CF2467E0CA00F641F2 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,12 +282,12 @@
 		1BECD6F02467990C0000A0C6 /* venue */ = {
 			isa = PBXGroup;
 			children = (
-				8BE056A02473FDFE00D94CCC /* Models */,
-				1BECD70824679D1F0000A0C6 /* Services */,
-				1B4844FC24713C1000836FB5 /* LoginScreen */,
-				1BECD7052467994B0000A0C6 /* SupportFiles */,
-				1B01EC7E2468D3B900FA52F1 /* AccountScreen */,
+				1BC3C00124752FFB00A2F775 /* EventScreen */,
 				1BECD706246799750000A0C6 /* MainScreen */,
+				1B4844FC24713C1000836FB5 /* LoginScreen */,
+				1B01EC7E2468D3B900FA52F1 /* AccountScreen */,
+				1BECD70824679D1F0000A0C6 /* Services */,
+				1BECD7052467994B0000A0C6 /* SupportFiles */,
 				1B8E09F324694238001C5E01 /* AddMarkerScreen */,
 				1BECD6FA246799100000A0C6 /* Assets.xcassets */,
 				8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */,
@@ -291,13 +334,6 @@
 				8BE056A12473FE3B00D94CCC /* DataService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		8BE056A02473FDFE00D94CCC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +404,7 @@
 				1BECD6F92467990C0000A0C6 /* Main.storyboard in Resources */,
 				1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */,
 				8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */,
+				1B4EB4AC247610CC002BA2C8 /* EventScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,11 +479,14 @@
 				1B01EC892468D47200FA52F1 /* AccountScreenRouter.swift in Sources */,
 				1BECD6F62467990C0000A0C6 /* MainScreenViewController.swift in Sources */,
 				1B8E09FE246942CC001C5E01 /* AddMarkerScreenPresenter.swift in Sources */,
+				1B4EB4B024761175002BA2C8 /* EventScreenRouter.swift in Sources */,
 				1B01EC822468D40800FA52F1 /* AccountScreenViewController.swift in Sources */,
 				1B48450524713CA500836FB5 /* LoginScreenPresenter.swift in Sources */,
 				1BECD6F22467990C0000A0C6 /* AppDelegate.swift in Sources */,
+				1B4EB4AB247610CC002BA2C8 /* EventScreenViewController.swift in Sources */,
 				1B8E09FC246942BA001C5E01 /* AddMarkerScreenRouter.swift in Sources */,
 				8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */,
+				1B4EB4AE2476111D002BA2C8 /* EventScreenPresenter.swift in Sources */,
 				1B48450224713C8700836FB5 /* LoginScreenViewController.swift in Sources */,
 				1BE688D12467E0F100F641F2 /* MainScreenPresenter.swift in Sources */,
 				1B5B7022246826A7004CA039 /* Models.swift in Sources */,

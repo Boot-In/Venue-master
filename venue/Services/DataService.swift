@@ -2,11 +2,10 @@
 //  DataService.swift
 //  venue
 //
-//  Created by Ахмед Фокичев on 19.05.2020.
 //  Copyright © 2020 Dmitriy Butin. All rights reserved.
 //
 
-import Foundation
+import GoogleMaps
 import CoreLocation
 
 class DataService {
@@ -20,4 +19,6 @@ class DataService {
     var events = [Event]()
     var localUser: Profile!
     var publicUsers = [String]()
+    var markerDidTapped = false
+    var marker: GMSMarker!
 }

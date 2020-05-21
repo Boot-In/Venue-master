@@ -13,8 +13,9 @@ import Foundation
 class MainScreenViewController: UIViewController {
     
     var presenter: MainScreenPresenterProtocol!
-    var isMark: Bool = false
+    var isMark: Bool = false  // установка маркера на экран
     
+    @IBOutlet weak var markerButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var intervalSC: UISegmentedControl!
     @IBOutlet weak var zoomLabel: UILabel!
@@ -26,7 +27,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
-        
+        markerButton.isHidden = true
         ModuleBulder.mainScreenConfigure(view: self)
         navigationController?.navigationBar.isHidden = true
         sliderSetup()
@@ -75,15 +76,25 @@ class MainScreenViewController: UIViewController {
     }
     
     @IBAction func addNewMarkerButtonTap() {
-        addNewMarker()
+        if DataService.shared.markerDidTapped {
+            presenter.goToEventScreen()
+        } else { addNewMarker() }
+    }
+    
+    func updateMarkerButton() {
+        markerButton.isHidden = false
+        if DataService.shared.markerDidTapped {
+            markerButton.setTitle("Подробно", for: .normal)
+            markerButton.backgroundColor = .opaqueSeparator
+        } else {
+            markerButton.setTitle("Добавить событие", for: .normal)
+            markerButton.backgroundColor = .systemYellow
+        }
     }
     
     @IBAction func accountButtonTap() {
-        presenter.tapButtonUser()
-        //presenter.goLoginScreen()
+        presenter.checkUserStatus()
     }
-    
-    @IBAction func unwindToMain(_ :UIStoryboardSegue) -> Void {}
     
     func addNewMarker() {
         if UserDefaults.standard.bool(forKey: "logined") {
@@ -93,7 +104,8 @@ class MainScreenViewController: UIViewController {
                 zoomLabel.text = "укажите точку на карте"
             }
         } else {
-            presenter.goAccountScreen()
+            return
+           
             // убрать активность кнопки
         }
     }
@@ -107,6 +119,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         mapView.clear()
         presenter.createMarkers()
         isMark = true
+        DataService.shared.markerDidTapped = false
+        updateMarkerButton()
         DataService.shared.coordinateEvent = coordinate
         DataService.shared.placeEvent = ""
         marker.map = mapView
@@ -114,10 +128,12 @@ extension MainScreenViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print("\(marker.title ?? "No marker")")
+        DataService.shared.markerDidTapped = true
+        DataService.shared.marker = marker
+        updateMarkerButton()
         return false
     }
     
-
     // Attach an info window to the POI using the GMSMarker.
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
         isMark = true
@@ -126,6 +142,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         infoMarker.opacity = 0
         DataService.shared.coordinateEvent = location
         DataService.shared.placeEvent = name
+        DataService.shared.markerDidTapped = false
+        updateMarkerButton()
         //infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker

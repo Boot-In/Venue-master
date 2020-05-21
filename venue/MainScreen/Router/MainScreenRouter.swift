@@ -11,6 +11,7 @@ protocol MainScreenRouterProtocol: class {
     func showAccountScreen()
     func showAddMarkerScreen()
     func showLoginScreen()
+    func showEventScreen()
 }
 
 final class MainScreenRouter: MainScreenRouterProtocol {
@@ -42,6 +43,12 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         nc.modalPresentationStyle = .fullScreen
         view?.navigationController?.present(nc, animated: true)
         //view?.navigationController?.pushViewController(loginScreenVC, animated: true)
+    }
+    
+    func showEventScreen() {
+        let addEventScreenVC = ModuleBulder.addEventScreen()
+        addEventScreenVC.modalPresentationStyle = .fullScreen
+        view?.navigationController?.present(addEventScreenVC, animated: true)
     }
     
 }

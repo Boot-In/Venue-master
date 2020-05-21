@@ -52,7 +52,7 @@ struct Event {
 struct Profile {
     let userID: String
     let userMail: String
-    let password: String
+    var password: String = ""
     
     let firstUserName: String
     let secondNameUser: String

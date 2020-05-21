@@ -21,11 +21,11 @@ protocol MainScreenPresenterProtocol: class {
     init(view: MainScreenProtocol, router: MainScreenRouterProtocol)
     func createMarkers()
     func startLocationService()
-    func goAccountScreen()  ///удалить
     func goAddMarkerScreen()
     func goLoginScreen()
+    func goToEventScreen()
     func checkUserLoginStatus()
-    func tapButtonUser()
+    func checkUserStatus()
 }
 
 class MainScreenPresenter: MainScreenPresenterProtocol {
@@ -56,19 +56,17 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         })
     }
     
-    func tapButtonUser() {
-        //  Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
+    func checkUserStatus() {
         if self.user != nil {
             print("...user?.uid", user?.uid ?? "")
             self.router.showAccountScreen()
         } else {
             self.router.showLoginScreen()
         }
-        //  })
     }
     
-    func goAccountScreen() {   /// удалить позже
-        router.showAccountScreen()
+    func goToEventScreen(){
+        router.showEventScreen()
     }
     
     func goLoginScreen() {
@@ -84,8 +82,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         ref = Database.database().reference().child("users").child(userId)
         print("loadMyProfile")
         let _ = ref.observe(.value, with: { (snapshot) in //refHandle
-            DataService.shared.events.removeAll()
-            
+           // DataService.shared.events.removeAll()
             let json = JSON(snapshot.value ?? [])
             print("loadMyProfile>json>",json)
            
@@ -93,12 +90,11 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             let nickNameUser = json["nickNameUser"].stringValue
             let secondNameUser = json["secondNameUser"].stringValue
             let userMail = json["userMail"].stringValue
-            let password = json["password"].stringValue
+            //let password = json["password"].stringValue
             
-            let profile = Profile(userID: userId, userMail: userMail, password: password, firstUserName: firstUserName, secondNameUser: secondNameUser, niсkNameUser: nickNameUser)
+            let profile = Profile(userID: userId, userMail: userMail, firstUserName: firstUserName, secondNameUser: secondNameUser, niсkNameUser: nickNameUser)
             DataService.shared.localUser = profile
             UserDefaults.standard.set(nickNameUser, forKey: "nickNameUser")
-            
         })
     }
     
@@ -111,7 +107,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             DataService.shared.events.removeAll()
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let json = JSON(rest.value ?? [])
-                //rest.key
+                
                 let dateEventString = json["dateEventString"].stringValue
                 let dateEventTI = json["dateEventTI"].doubleValue
                 let discriptionEvent = json["discriptionEvent"].stringValue
@@ -122,7 +118,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 let nameEvent = json["nameEvent"].stringValue
                 let snipetEvent = json["snipetEvent"].stringValue
                 let userID = json["userID"].stringValue
-                
+        
                 let coordinateEvent = CLLocationCoordinate2D(latitude: latEvent, longitude: lngEvent)
                 let date = Date().addingTimeInterval(dateEventTI)
                 

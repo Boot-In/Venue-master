@@ -52,16 +52,17 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func clearLocalUserData() {
         UserDefaults.standard.set(false, forKey: "logined")
-        UserDefaults.standard.set("", forKey: "email")
-        UserDefaults.standard.set("", forKey: "password")
+        UserDefaults.standard.set("", forKey: "userMail")
+      //  UserDefaults.standard.set("", forKey: "password")
         UserDefaults.standard.set("", forKey: "nameUser")
         UserDefaults.standard.set("", forKey: "secondNameUser")
         UserDefaults.standard.set("", forKey: "nickNameUser")
+        UserDefaults.standard.set("", forKey: "userID")
     }
     
     func createUser(email: String, password: String, fName: String, sName: String, nik: String) {
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(password, forKey: "password")
+       // UserDefaults.standard.set(email, forKey: "email")
+       // UserDefaults.standard.set(password, forKey: "password")
         UserDefaults.standard.set(fName, forKey: "nameUser")
         UserDefaults.standard.set(sName, forKey: "secondNameUser")
         UserDefaults.standard.set(nik, forKey: "nickNameUser")
@@ -78,7 +79,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
             let userRef = self?.ref.child(newUser.uid)
             userRef?.setValue([
                 "userMail" : newUser.email,
-                "password" : password,
+               // "password" : password,
                 "firstUserName" : fName,
                 "secondNameUser" : sName,
                 "nickNameUser": nik
@@ -86,9 +87,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
             
         })
         
-        UserDefaults.standard.set(true, forKey: "logined")
-        
-        let user = Profile(userID: getUID(), userMail: email, password: password, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
+        let user = Profile(userID: getUID(), userMail: email, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
         print("Пользователь \(user.userID) успешно создан !")
         DataService.shared.localUser = user
         self.view.sendMessage(text: "Данные сохранены !")
