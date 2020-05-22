@@ -23,14 +23,12 @@ class EventScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nickNameLabel.isEnabled = false
         eventDataTF.isEnabled = false
         eventNameTF.isEnabled = false
         eventCategoryTF.isEnabled = false
         eventDiscriptionTV.isEditable = false
         
         presenter.loadEventInfo()
-        
     }
 
   

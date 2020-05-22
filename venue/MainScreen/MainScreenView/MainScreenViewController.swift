@@ -47,11 +47,13 @@ class MainScreenViewController: UIViewController {
 
     func checkAccount() {
         if UserDefaults.standard.bool(forKey: "logined"){
+            zoomLabel.text = ""
             accountButton.setBackgroundImage(
                 UIImage(systemName: "person.fill"), for: .normal)
         } else {
             accountButton.setBackgroundImage(
                 UIImage(systemName: "person"), for: .normal)
+            zoomLabel.text = "создайте или войдите в свой аккаунт"
         }
     }
     
@@ -85,7 +87,7 @@ class MainScreenViewController: UIViewController {
         markerButton.isHidden = false
         if DataService.shared.markerDidTapped {
             markerButton.setTitle("Подробно", for: .normal)
-            markerButton.backgroundColor = .opaqueSeparator
+            markerButton.backgroundColor = .lightGray
         } else {
             markerButton.setTitle("Добавить событие", for: .normal)
             markerButton.backgroundColor = .systemYellow
@@ -104,8 +106,7 @@ class MainScreenViewController: UIViewController {
                 zoomLabel.text = "укажите точку на карте"
             }
         } else {
-            return
-           
+            zoomLabel.text = "создайте или войдите в свой аккаунт"
             // убрать активность кнопки
         }
     }

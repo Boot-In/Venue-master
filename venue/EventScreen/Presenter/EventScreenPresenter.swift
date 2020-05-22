@@ -6,7 +6,7 @@
 //  Copyright © 2020 Dmitriy Butin. All rights reserved.
 //
 
-import Foundation
+import GoogleMaps
 
 /// Вывод информации
 protocol EventScreenProtocol: class {
@@ -32,9 +32,26 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
     }///////////////////////////////////////////////////
    
   func loadEventInfo() {
-   
-    //view.setTextToView(nickName: <#T##String#>, eventData: <#T##String#>, eventName: <#T##String#>, eventCategory: <#T##String#>, eventDiscription: <#T##String#>)
+    guard let marker = DataService.shared.marker else { return }
+    guard let event = searchEvent(marker: marker) else { return }
+    view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent)
     }
 
-
+    func searchEvent(marker: GMSMarker) -> Event? {
+        let events = DataService.shared.events
+        var events_ = events
+        var i = (events_.count - 1)
+        while i > 0 {
+            if marker.title != "\(events_[i].dateEventString) \(events_[i].nameEvent)" {
+                events_.remove(at: i)
+            } else if marker.position.latitude != events_[i].latEvent && marker.position.longitude != events_[i].lngEvent {
+                events_.remove(at: i)
+            }
+            i -= 1
+        }
+        print("Мероприятий = ", events_.count)
+        return events_.last
+    }
+    
+    
 }

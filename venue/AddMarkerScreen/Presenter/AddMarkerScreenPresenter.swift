@@ -37,7 +37,8 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         let coordinate = DataService.shared.coordinateEvent
         let date = DataService.shared.dateEvent
         guard let user = Auth.auth().currentUser else { return }
-        var event = Event(userID: user.uid, nameEvent: nameEvent, coordinate: coordinate, date: date)
+        let userNick = DataService.shared.localUser.niсkNameUser
+        var event = Event(userID: user.uid, userNick: userNick, nameEvent: nameEvent, coordinate: coordinate, date: date)
         event.dateEventString = DataService.shared.dataEventString
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
@@ -48,6 +49,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         let eventRef = ref.child("events").child(getEventID(event))
         eventRef.setValue([
             "userID" : event.userID,
+            "userNick": event.userNick,
             "nameEvent" : event.nameEvent,
             "latEvent" : event.latEvent,
             "lngEvent" : event.lngEvent,

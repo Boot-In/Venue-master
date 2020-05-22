@@ -11,8 +11,8 @@ import Firebase
 
 struct Event {
     let userID: String
+    let userNick: String
     let nameEvent: String
-    //let ref: DatabaseReference?
     let latEvent: Double
     let lngEvent: Double
     let dateEventTI: Double
@@ -38,13 +38,13 @@ struct Event {
 //        ref = snapshot.ref
 //    }
     
-    init(userID: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
+    init(userID: String, userNick: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
         self.userID = userID
+        self.userNick = userNick
         self.nameEvent = nameEvent
         self.latEvent = coordinate.latitude
         self.lngEvent = coordinate.longitude
         self.dateEventTI = date.timeIntervalSince1970
-       // ref = nil
     }
     
 }
