@@ -49,6 +49,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         let eventRef = ref.child("events").child(getEventID(event))
         eventRef.setValue([
             "userID" : event.userID,
+            "eventID" : getEventID(event),
             "userNick": event.userNick,
             "nameEvent" : event.nameEvent,
             "latEvent" : event.latEvent,

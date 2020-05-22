@@ -123,6 +123,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 let nameEvent = json["nameEvent"].stringValue
                 let snipetEvent = json["snipetEvent"].stringValue
                 let userID = json["userID"].stringValue
+                let eventID = json["eventID"].stringValue
                 let userNick = json["userNick"].stringValue
         
                 let coordinateEvent = CLLocationCoordinate2D(latitude: latEvent, longitude: lngEvent)
@@ -134,6 +135,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 event.iconEvent = iconEvent
                 event.lifeTimeEvent = lifeTimeEvent
                 event.snipetEvent = snipetEvent
+                event.eventID = eventID
                 
                 events.append(event)
             }

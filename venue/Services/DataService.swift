@@ -17,8 +17,9 @@ class DataService {
     var dataEventString = String()
     var categoryEvent = String()
     var events = [Event]()
+    var eventID = String()
     var localUser: Profile!
-    var publicUsers = [String]()
+    var fallowUsers = [String]()
     var markerDidTapped = false
     var marker: GMSMarker!
 }

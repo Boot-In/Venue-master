@@ -14,20 +14,16 @@ class EventScreenViewController: UIViewController {
     //var marker: GMSMarker!
     
     @IBOutlet weak var nickNameLabel: UILabel!
-    @IBOutlet weak var eventDataTF: UITextField!
-    @IBOutlet weak var eventNameTF: UITextField!
-    @IBOutlet weak var eventCategoryTF: UITextField!
+    @IBOutlet weak var eventDataLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var eventCategoryLabel: UILabel!
     @IBOutlet weak var eventDiscriptionTV: UITextView!
     @IBOutlet weak var goButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        eventDataTF.isEnabled = false
-        eventNameTF.isEnabled = false
-        eventCategoryTF.isEnabled = false
         eventDiscriptionTV.isEditable = false
-        
         presenter.loadEventInfo()
     }
 
@@ -38,6 +34,7 @@ class EventScreenViewController: UIViewController {
     }
     
     @IBAction func goButtonTap() {
+        presenter.followMe()
     }
     
 }
@@ -48,9 +45,9 @@ extension EventScreenViewController: EventScreenProtocol {
     func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String) {
         
         nickNameLabel.text = nickName
-        eventDataTF.text = eventData
-        eventNameTF.text = eventName
-        eventCategoryTF.text = eventCategory
+        eventDataLabel.text = "Дата проведения: \(eventData)"
+        eventNameLabel.text = "Название: \(eventName)"
+        eventCategoryLabel.text = "Категория: \(eventCategory)"
         eventDiscriptionTV.text = eventDiscription
     }
     

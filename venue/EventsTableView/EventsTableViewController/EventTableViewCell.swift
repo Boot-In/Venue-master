@@ -13,8 +13,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var nameEventLabel: UILabel!
     @IBOutlet weak var nickNameEventLabel: UILabel!
     @IBOutlet weak var discriptionEventLabel: UILabel!
-    
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +21,6 @@ class EventTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     

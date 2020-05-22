@@ -7,7 +7,7 @@
 //
 
 import GoogleMaps
-
+import Firebase
 /// Вывод информации
 protocol EventScreenProtocol: class {
     
@@ -19,6 +19,7 @@ protocol EventScreenPresenterProtocol: class {
     init(view: EventScreenProtocol, router: EventScreenRouterProtocol)
     
   func loadEventInfo()
+    func followMe()
 }
 
 class EventScreenPresenter: EventScreenPresenterProtocol {
@@ -50,8 +51,20 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
             i -= 1
         }
         print("Мероприятий = ", events_.count)
+        if let event = events_.last {
+            DataService.shared.eventID = event.eventID
+        }
         return events_.last
     }
     
+    func followMe() {
+        let eventID = DataService.shared.eventID
+        guard let localUser = DataService.shared.localUser else { return }
+        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+        let ref = Database.database().reference()
+        let eventRef = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
+        eventRef.setValue([ "niсkNameUser" : localUser.niсkNameUser ])
+        print("save Follow Event Complete !")
+    }
     
 }

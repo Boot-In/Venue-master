@@ -21,9 +21,10 @@ class EventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // eventsTableView.delegate = self
-       // eventsTableView.dataSource = self
-     
+        eventsTableView.delegate = self
+        eventsTableView.dataSource = self
+        print("Элементов для таблицы = ", events.count)
+        
     }
     
     
