@@ -9,12 +9,12 @@
 import UIKit
 
 protocol Builder {
-    
     static func mainScreenConfigure(view: MainScreenViewController)
     static func accountScreen() -> AccountScreenViewController
     static func addMarkerScreen() -> AddMarkerScreenViewController
     static func addLoginScreen() -> LoginScreenViewController
     static func addEventScreen() -> EventScreenViewController
+    static func addEventsTableViewScreen() -> EventsTableViewController
 }
 
 class ModuleBulder: Builder {
@@ -56,6 +56,14 @@ class ModuleBulder: Builder {
         let view = EventScreenViewController()
         let router = EventScreenRouter(with: view)
         let presenter = EventScreenPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
+    }
+    
+    static func addEventsTableViewScreen() -> EventsTableViewController {
+        let view = EventsTableViewController()
+        let router = EventsTableViewRouter(with: view)
+        let presenter = EventsTableViewPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }

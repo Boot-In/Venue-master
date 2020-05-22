@@ -24,6 +24,7 @@ protocol MainScreenPresenterProtocol: class {
     func goAddMarkerScreen()
     func goLoginScreen()
     func goToEventScreen()
+    func goToEventTableView()
     func checkUserLoginStatus()
     func checkUserStatus()
 }
@@ -75,6 +76,10 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     
     func goAddMarkerScreen() {
         router.showAddMarkerScreen()
+    }
+    
+    func goToEventTableView() {
+        router.showTableViewScreen()
     }
     
     func loadMyProfile (userId: String) {

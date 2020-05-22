@@ -18,15 +18,25 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0QN-g6-Zqc">
                                 <rect key="frame" x="15" y="49" width="345" height="30"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QM2-h4-bBs">
+                                        <rect key="frame" x="0.0" y="1" width="30" height="27.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="QTI-Dk-PAI"/>
+                                            <constraint firstAttribute="height" constant="30" id="knx-yO-JpP"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="table" catalog="system"/>
+                                        <connections>
+                                            <action selector="tableViewButtonTap" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffr-Yf-eXb"/>
+                                        </connections>
+                                    </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fDf-HW-xTV">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="31"/>
+                                        <rect key="frame" x="50" y="0.0" width="245" height="31"/>
                                         <segments>
-                                            <segment title="День">
+                                            <segment title="Сегодня">
                                                 <size key="contentOffset" width="1" height="1"/>
                                             </segment>
                                             <segment title="Неделя"/>
                                             <segment title="Месяц"/>
-                                            <segment title="Год"/>
                                         </segments>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzE-OJ-IC3">
@@ -151,5 +161,6 @@
         <image name="minus" catalog="system" width="128" height="24"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="table" catalog="system" width="128" height="93"/>
     </resources>
 </document>

@@ -98,6 +98,11 @@ class MainScreenViewController: UIViewController {
         presenter.checkUserStatus()
     }
     
+    @IBAction func tableViewButtonTap() {
+        presenter.goToEventTableView()
+    }
+    
+    
     func addNewMarker() {
         if UserDefaults.standard.bool(forKey: "logined") {
             if isMark {

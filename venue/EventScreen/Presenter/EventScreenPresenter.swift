@@ -41,7 +41,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         let events = DataService.shared.events
         var events_ = events
         var i = (events_.count - 1)
-        while i > 0 {
+        while i >= 0 {
             if marker.title != "\(events_[i].dateEventString) \(events_[i].nameEvent)" {
                 events_.remove(at: i)
             } else if marker.position.latitude != events_[i].latEvent && marker.position.longitude != events_[i].lngEvent {
