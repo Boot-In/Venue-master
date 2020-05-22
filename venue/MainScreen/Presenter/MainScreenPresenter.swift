@@ -19,7 +19,7 @@ protocol MainScreenProtocol: class {
 // это как мы принимаем информацию
 protocol MainScreenPresenterProtocol: class {
     init(view: MainScreenProtocol, router: MainScreenRouterProtocol)
-    func createMarkers()
+    func createMarkers(eventsForMarker: [Event])
     func startLocationService()
     func goAddMarkerScreen()
     func goLoginScreen()
@@ -27,12 +27,14 @@ protocol MainScreenPresenterProtocol: class {
     func goToEventTableView()
     func checkUserLoginStatus()
     func checkUserStatus()
+    func markerFiltred(range: Int)
 }
 
 class MainScreenPresenter: MainScreenPresenterProtocol {
     
     let view: MainScreenProtocol
     let router: MainScreenRouterProtocol
+    
     var ref: DatabaseReference!
     var user: User?
     
@@ -43,7 +45,6 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
    
     func startLocationService() {
         LocationService.shared.start()
-        //createMarkers()
         loadAllEvents()
     }
     
@@ -108,11 +109,10 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         
         ref = Database.database().reference().child("events")
         print("...loadAllEvents>events")
+        var events = [Event]()
         let _ = ref.observe(.value, with: { (snapshot) in //refHandle
-            DataService.shared.events.removeAll()
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let json = JSON(rest.value ?? [])
-                
                 let dateEventString = json["dateEventString"].stringValue
                 let dateEventTI = json["dateEventTI"].doubleValue
                 let discriptionEvent = json["discriptionEvent"].stringValue
@@ -126,7 +126,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 let userNick = json["userNick"].stringValue
         
                 let coordinateEvent = CLLocationCoordinate2D(latitude: latEvent, longitude: lngEvent)
-                let date = Date().addingTimeInterval(dateEventTI)
+                let date = Date(timeIntervalSince1970: dateEventTI)
                 
                 var event = Event(userID: userID, userNick: userNick, nameEvent: nameEvent, coordinate: coordinateEvent, date: date)
                 event.dateEventString = dateEventString
@@ -135,17 +135,18 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
                 event.lifeTimeEvent = lifeTimeEvent
                 event.snipetEvent = snipetEvent
                 
-                DataService.shared.events.append(event)
+                events.append(event)
             }
-            
-            self.createMarkers()
+             print("загружено \(events.count) элементов")
+            DataService.shared.events = events
+            self.markerFiltred(range: 2) // месяц
         })
     }
     
-    func createMarkers() {
+    func createMarkers(eventsForMarker: [Event]) {
+        let events = eventsForMarker
         var markers: [GMSMarker] = []
-        let events = DataService.shared.events
-        
+        print("Для создания маркеров доступно \(events.count) элементов")
         for event in events {
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent) )
             marker.icon = UIImage(named: event.iconEvent)
@@ -153,8 +154,31 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             marker.snippet = event.snipetEvent
             markers.append(marker)
         }
-    
         view.setMarkers(markers: markers)
     }
+    
+    func markerFiltred(range: Int) {
+        let events = DataService.shared.events
+        var eventsFiltred:[Event] = []
+        let today = Date().timeIntervalSince1970
+        print("Сегодня: ", today, Date(timeIntervalSince1970: today) )
+        var interval = 0.0
+        
+        switch range {
+        case 0: interval = today + 86400           //день
+        case 1: interval = today + (86400*7)       //неделя
+        case 2: interval = today + (86400*30)      //месяц
+        default: interval = today + (86400*365)    //год
+        }
+        for event in events {
+            if interval - event.dateEventTI > 0 && (event.dateEventTI + 80000 - today) > 0 {
+                eventsFiltred.append(event)
+            }
+        }
+        print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
+        createMarkers(eventsForMarker: eventsFiltred)
+        
+    }
+    
 
 }

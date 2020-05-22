@@ -28,6 +28,7 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         self.mapView.delegate = self
         markerButton.isHidden = true
+        intervalSC.selectedSegmentIndex = 2
         ModuleBulder.mainScreenConfigure(view: self)
         navigationController?.navigationBar.isHidden = true
         sliderSetup()
@@ -41,7 +42,7 @@ class MainScreenViewController: UIViewController {
         checkAccount()
         if isMark {
             mapView.clear()
-            presenter.createMarkers()
+            presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
         }
     }
 
@@ -70,6 +71,10 @@ class MainScreenViewController: UIViewController {
         zoomSlider.value = 16
     }
     
+    @IBAction func rangeSCaction(_ sender: UISegmentedControl) {
+        mapView.clear()
+        presenter.markerFiltred(range: sender.selectedSegmentIndex)
+    }
     
     @IBAction func zoomSliderAction(_ sender: UISlider) {
         mapView.animate(toZoom: zoomSlider.value)
@@ -123,7 +128,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker(position: coordinate)
         mapView.clear()
-        presenter.createMarkers()
+        presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
         isMark = true
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
