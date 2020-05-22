@@ -110,6 +110,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         ref = Database.database().reference().child("events")
         print("...loadAllEvents>events")
         var events = [Event]()
+        events.removeAll()
         let _ = ref.observe(.value, with: { (snapshot) in //refHandle
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let json = JSON(rest.value ?? [])

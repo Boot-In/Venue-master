@@ -43,7 +43,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
         event.snipetEvent = DataService.shared.categoryEvent
-        DataService.shared.events.append(event)
+        /// DataService.shared.events.append(event)  ????
         /// Сохранение
         let ref = Database.database().reference()
         let eventRef = ref.child("events").child(getEventID(event))

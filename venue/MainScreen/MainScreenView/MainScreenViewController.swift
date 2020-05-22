@@ -29,6 +29,8 @@ class MainScreenViewController: UIViewController {
         self.mapView.delegate = self
         markerButton.isHidden = true
         intervalSC.selectedSegmentIndex = 2
+        intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
+        intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         ModuleBulder.mainScreenConfigure(view: self)
         navigationController?.navigationBar.isHidden = true
         sliderSetup()

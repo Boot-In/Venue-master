@@ -23,8 +23,16 @@ class EventsTableViewController: UIViewController {
         
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
+        eventsTableView.backgroundColor = .clear
+        eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print("Элементов для таблицы = ", events.count)
         
+        searchBar.barTintColor = view.backgroundColor
+      
+        rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
+        rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        //rangeSC.backgroundColor = .clear
+        //rangeSC.selectedSegmentTintColor = .systemGray
     }
     
     
@@ -47,6 +55,7 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EventTableViewCell
+        cell.backgroundColor = .clear
         let event = events[indexPath.row]
         cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
         cell.discriptionEventLabel.text = event.discriptionEvent
