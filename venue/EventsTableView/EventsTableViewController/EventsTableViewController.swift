@@ -16,30 +16,41 @@ class EventsTableViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var eventsTableView: UITableView!
     
-    let events = DataService.shared.events
+    var events: [Event]!
+    var eventsFiltred: [Event]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rangeSC.selectedSegmentIndex = 3
+        events = presenter.markerFiltred(range: rangeSC.selectedSegmentIndex)
+        eventsFiltred = events
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
+        searchBar.delegate = self
         eventsTableView.backgroundColor = .clear
         eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print("Элементов для таблицы = ", events.count)
         
         searchBar.barTintColor = view.backgroundColor
-      
+        
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        
         //rangeSC.backgroundColor = .clear
         //rangeSC.selectedSegmentTintColor = .systemGray
+    }
+    
+    @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
+        events = presenter.markerFiltred(range: sender.selectedSegmentIndex)
+        eventsFiltred = events
+        eventsTableView.reloadData()
     }
     
     
     @IBAction func backButtonTap() {
         navigationController?.popToRootViewController(animated: true)
     }
-    
     
 }
 
@@ -50,18 +61,30 @@ extension EventsTableViewController: EventsTableViewProtocol {
 extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return eventsFiltred.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EventTableViewCell
         cell.backgroundColor = .clear
-        let event = events[indexPath.row]
+        let event = eventsFiltred[indexPath.row]
         cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
         cell.discriptionEventLabel.text = event.discriptionEvent
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
+        cell.eventImage.image = UIImage(named: event.iconEvent)
         return cell
     }
     
-    
+}
+
+extension EventsTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        eventsFiltred = events
+        
+        if searchText.isEmpty == false {
+            eventsFiltred = events.filter({ $0.nameEvent.lowercased().contains(searchText.lowercased()) })
+        }
+        
+        eventsTableView.reloadData()
+    }
 }

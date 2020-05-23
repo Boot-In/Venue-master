@@ -164,7 +164,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         let events = DataService.shared.events
         var eventsFiltred:[Event] = []
         let today = Date().timeIntervalSince1970
-        print("Сегодня: ", today, Date(timeIntervalSince1970: today) )
+        print("Сегодня: ", today, Date(timeIntervalSince1970: today))
         var interval = 0.0
         
         switch range {

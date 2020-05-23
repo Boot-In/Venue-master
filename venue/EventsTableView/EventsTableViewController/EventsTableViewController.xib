@@ -28,6 +28,9 @@
                         <segment title="Месяц"/>
                         <segment title="Год"/>
                     </segments>
+                    <connections>
+                        <action selector="rangeSCAction:" destination="-1" eventType="valueChanged" id="mgH-xJ-KbP"/>
+                    </connections>
                 </segmentedControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-uz-K3l">
                     <rect key="frame" x="134" y="617" width="107" height="30"/>

@@ -13,9 +13,14 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var nameEventLabel: UILabel!
     @IBOutlet weak var nickNameEventLabel: UILabel!
     @IBOutlet weak var discriptionEventLabel: UILabel!
-        
+    @IBOutlet weak var eventImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        nameEventLabel.textColor = .black
+        nickNameEventLabel.textColor = .black
+        discriptionEventLabel.textColor = .black
+        eventImage.backgroundColor = .clear
         // Initialization code
     }
 
