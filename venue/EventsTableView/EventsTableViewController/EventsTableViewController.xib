@@ -55,6 +55,16 @@
                         <outlet property="delegate" destination="-1" id="xrS-qs-1XZ"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ5-y2-iiW">
+                    <rect key="frame" x="274" y="617" width="85" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="remove OLD">
+                        <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="removeOldEvents" destination="-1" eventType="touchUpInside" id="17m-fK-rNi"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.81293554638926924" green="1" blue="0.82950898275714025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

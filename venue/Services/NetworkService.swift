@@ -26,6 +26,15 @@ class NetworkService {
         eventRef.removeValue()
     }
     
+    static func removeOldEvent(eventsID: [String]) {
+        print("Запущен процесс удаления старых событий")
+        let ref = Database.database().reference()
+        for eventID in eventsID {
+            let eventRef = ref.child("events").child(eventID)
+            eventRef.removeValue()
+        }
+    }
+    
     static func loadAllEvents() {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")
@@ -34,8 +43,9 @@ class NetworkService {
         ref.observe(.value, with: { (snapshot) in
             for item in snapshot.children {
                 let event = Event(snapshot: item as! DataSnapshot)
+               // print("item = ", item)
                 print("EventID = ", event.eventID)
-                eventsFromNet.append(event)
+                eventsFromNet.append(event) 
             }
             DataService.shared.events = eventsFromNet
             print("загружено \(eventsFromNet.count) элементов")
@@ -63,6 +73,17 @@ class NetworkService {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    static func followMe() {
+        let eventID = DataService.shared.eventID
+        guard let localUser = DataService.shared.localUser else { return }
+        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+        let ref = Database.database().reference()
+        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
+        let update = ["\(localUser.userID)": localUser.niсkNameUser]
+        eventRefKey.updateChildValues(update)
+        print("save Follow Event Complete !")
     }
     
     

@@ -47,6 +47,11 @@ class EventsTableViewController: UIViewController {
         eventsTableView.reloadData()
     }
     
+    @IBAction func removeOldEvents() {
+        if let oldEvents = DataService.shared.oldEventsID, oldEvents.count > 0 {
+        NetworkService.removeOldEvent(eventsID: oldEvents)
+        } else { print("Старых событий нет.") }
+    }
     
     @IBAction func backButtonTap() {
         navigationController?.popToRootViewController(animated: true)

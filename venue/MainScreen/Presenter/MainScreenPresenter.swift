@@ -142,8 +142,12 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             if interval - event.dateEventTI > 0 && (event.dateEventTI + 80000 - today) > 0 {
                 eventsFiltred.append(event)
             }
+            if event.dateEventTI < today {
+                DataService.shared.oldEventsID?.append(event.eventID)
+            }
         }
         print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
+        print("Старых событий = \(String(describing: DataService.shared.oldEventsID?.count)) ")
         createMarkers(eventsForMarker: eventsFiltred)
     }
     

@@ -48,7 +48,7 @@ class EventScreenViewController: UIViewController {
     }
     
     @IBAction func goButtonTap() {
-        presenter.followMe()
+        NetworkService.followMe()
         displayWarningLabel(withText: "Ваш голос принят !")
     }
     

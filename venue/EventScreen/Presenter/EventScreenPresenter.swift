@@ -20,7 +20,6 @@ protocol EventScreenPresenterProtocol: class {
     init(view: EventScreenProtocol, router: EventScreenRouterProtocol)
     
     func loadEventInfo(event: Event)
-    func followMe()
     func markerToEvent()
 
 }
@@ -79,18 +78,5 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
 //        print("save Follow Event Complete !")
 //    }
     
-    func followMe() {
-        let eventID = DataService.shared.eventID
-        guard let localUser = DataService.shared.localUser else { return }
-        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
-        let ref = Database.database().reference()
-        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
-        let followInfo = [ "niсkNameUser" : localUser.niсkNameUser,
-                           "userID" : localUser.userID ]
-        let update = ["\(localUser.userID)": followInfo]
-        eventRefKey.updateChildValues(update)
-        print("save Follow Event Complete !")
-    }
-
     
 }
