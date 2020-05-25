@@ -53,6 +53,7 @@ class EventScreenViewController: UIViewController {
     @IBAction func removeEventButtonTap() {
         guard let event = DataService.shared.event else { return }
         NetworkService.removeEvent(event: event)
+        DataService.shared.event = nil
         self.dismiss(animated: true)
     }
     

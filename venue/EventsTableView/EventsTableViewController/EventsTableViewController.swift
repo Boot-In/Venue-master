@@ -42,6 +42,7 @@ class EventsTableViewController: UIViewController {
     }
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
+        self.view.endEditing(true)
         events = presenter.markerFiltred(range: sender.selectedSegmentIndex)
         eventsFiltred = events
         eventsTableView.reloadData()
@@ -97,4 +98,6 @@ extension EventsTableViewController: UISearchBarDelegate {
         }
         eventsTableView.reloadData()
     }
+    
+    
 }

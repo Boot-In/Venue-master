@@ -35,12 +35,13 @@ class AddMarkerScreenViewController: UIViewController {
         
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .red
-        loadDataForTextField()
         createDatePicker()
+        loadDataForTextField()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // при включённом наблюдателе не работает
     }
     
     func observeToKeyboard() {
@@ -58,6 +59,10 @@ class AddMarkerScreenViewController: UIViewController {
     @objc func kbDidHide() {
           (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
        }
+    
+    func loadTextFieldFromEvent() {
+       // presenter.
+    }
     
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
@@ -84,12 +89,7 @@ class AddMarkerScreenViewController: UIViewController {
         picker.locale = .init(identifier: "Russian")
     }
     
-    @objc func donePressed() {
-//        let formatter = DateFormatter()
-//        formatter.locale = .init(identifier: "Russian")
-//        formatter.dateStyle = .short
-//        formatter.timeStyle = .none
-        
+    @objc func donePressed() {       
         let dateString = formatter.string(from: picker.date)
         DataService.shared.dateEvent = picker.date
         DataService.shared.dataEventString = dateString
@@ -127,7 +127,8 @@ class AddMarkerScreenViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.view.endEditing(true) // Скрывает клавиатуру, вызванную для любого объекта
+        self.view.endEditing(true)
+        // Скрывает клавиатуру, вызванную для любого объекта
     }
     
 }
@@ -135,13 +136,25 @@ class AddMarkerScreenViewController: UIViewController {
 
 extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     
+    func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String) {
+        
+        userNickLabel.text = "Организатор: \(nik)"
+        nameEventTF.text = name
+        dateEventTF.text = formatter.string(from: Date())
+        categoryEventTF.text = caregiry
+        iconEventIV.image = UIImage(named: icon)
+        discriptionEventTV.text = discription
+        infoLabel.text = "Внесите изменения, проверьте дату"
+        DataService.shared.dateEvent = Date()
+        DataService.shared.dataEventString = formatter.string(from: Date())
+    }
     
 }
 
 extension AddMarkerScreenViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true) // Скрывает клавиатуру по Enter
+      self.view.endEditing(true) // Скрывает клавиатуру по Enter
     }
     
 }

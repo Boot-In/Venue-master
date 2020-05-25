@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 import Firebase
+import CoreLocation
 
 /// Вывод информации
 protocol AddMarkerScreenProtocol: class {
-    
+    func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String)
 }
 
 // это как мы принимаем информацию
@@ -20,6 +21,7 @@ protocol AddMarkerScreenPresenterProtocol: class {
     init(view: AddMarkerScreenProtocol, router: AddMarkerScreenRouterProtocol)
     
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String)
+    func loadTFFromEvent(event: Event)
 }
 
 class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
@@ -33,6 +35,12 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
        
     }///////////////////////////////////////////////////
    
+    func loadTFFromEvent(event: Event) {
+        let coordinate = CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent)
+        DataService.shared.coordinateEvent = coordinate
+        view.fieldInfo(nik: event.userNick, name: event.nameEvent, caregiry: event.snipetEvent, icon: event.iconEvent, discription: event.discriptionEvent)
+    }
+    
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String) {
         let coordinate = DataService.shared.coordinateEvent
         let date = DataService.shared.dateEvent
