@@ -11,15 +11,18 @@ import Firebase
 /// Вывод информации
 protocol EventScreenProtocol: class {
     
-  func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String)
+    func removeButtonSetting(hide: Bool)
+    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String)
 }
 
 // это как мы принимаем информацию
 protocol EventScreenPresenterProtocol: class {
     init(view: EventScreenProtocol, router: EventScreenRouterProtocol)
     
-  func loadEventInfo()
+    func loadEventInfo(event: Event)
     func followMe()
+    func markerToEvent()
+
 }
 
 class EventScreenPresenter: EventScreenPresenterProtocol {
@@ -32,12 +35,20 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         self.router = router
     }///////////////////////////////////////////////////
    
-  func loadEventInfo() {
-    guard let marker = DataService.shared.marker else { return }
-    guard let event = searchEvent(marker: marker) else { return }
-    view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent)
+    func loadEventInfo(event: Event) {
+        if event.userID == DataService.shared.localUser.userID {
+            view.removeButtonSetting(hide: false)
+        } else { view.removeButtonSetting(hide: true) }
+        print("eventID: ", event.eventID)
+        view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent)
     }
 
+    func markerToEvent() {
+        guard let marker = DataService.shared.marker else { return }
+        guard let event = searchEvent(marker: marker) else { return }
+        loadEventInfo(event: event)
+    }
+    
     func searchEvent(marker: GMSMarker) -> Event? {
         let events = DataService.shared.events
         var events_ = events
@@ -53,18 +64,33 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         print("Мероприятий = ", events_.count)
         if let event = events_.last {
             DataService.shared.eventID = event.eventID
+            DataService.shared.event = event
         }
         return events_.last
     }
+    
+//    func followMe() {
+//        let eventID = DataService.shared.eventID
+//        guard let localUser = DataService.shared.localUser else { return }
+//        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+//        let ref = Database.database().reference()
+//        let eventRef = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
+//        eventRef.setValue([ "niсkNameUser" : localUser.niсkNameUser ])
+//        print("save Follow Event Complete !")
+//    }
     
     func followMe() {
         let eventID = DataService.shared.eventID
         guard let localUser = DataService.shared.localUser else { return }
         print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
-        let eventRef = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
-        eventRef.setValue([ "niсkNameUser" : localUser.niсkNameUser ])
+        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
+        let followInfo = [ "niсkNameUser" : localUser.niсkNameUser,
+                           "userID" : localUser.userID ]
+        let update = ["\(localUser.userID)": followInfo]
+        eventRefKey.updateChildValues(update)
         print("save Follow Event Complete !")
     }
+
     
 }

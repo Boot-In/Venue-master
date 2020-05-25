@@ -6,7 +6,7 @@
 //
 
 import GoogleMaps
-import CoreLocation
+//import CoreLocation
 
 class DataService {
     static let shared = DataService()
@@ -17,6 +17,7 @@ class DataService {
     var dataEventString = String()
     var categoryEvent = String()
     var events = [Event]()
+    var event: Event!
     var eventID = String()
     var localUser: Profile!
     var fallowUsers = [String]()

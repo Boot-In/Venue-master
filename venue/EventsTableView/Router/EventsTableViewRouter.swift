@@ -7,8 +7,8 @@
 //
 
 protocol EventsTableViewRouterProtocol: class {
-
-  
+    
+    func showEventScreen()
 }
 
 final class EventsTableViewRouter: EventsTableViewRouterProtocol {
@@ -20,12 +20,11 @@ final class EventsTableViewRouter: EventsTableViewRouterProtocol {
         self.view = vc
     }
     
-//func showAccountScreen() {
-//    let accountScreenVC = ModuleBulder.accountScreen()
-//    view?.navigationController?.pushViewController(accountScreenVC, animated: true)
-//   // accountScreenVC.modalPresentationStyle = .fullScreen
-//   // view?.present(accountScreenVC, animated: true)
-//}
+    func showEventScreen() {
+        let addEventScreenVC = ModuleBulder.addEventScreen()
+        addEventScreenVC.modalPresentationStyle = .fullScreen
+        view?.navigationController?.present(addEventScreenVC, animated: true)
+    }
     
-   
+    
 }

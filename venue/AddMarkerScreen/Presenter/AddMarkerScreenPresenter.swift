@@ -62,7 +62,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
             "lifeTimeEvent" : event.lifeTimeEvent
         ])
         print("saveEvent Complete !")
-   
+        print("EventID = \(getEventID(event))")
     }
 
     func getEventID(_ event: Event) -> String {
@@ -72,7 +72,6 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
         iD += String(event.nameEvent.count)
         iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
-        print("EventID = \(iD)")
         return iD
     }
 

@@ -14,7 +14,9 @@
                 <outlet property="eventDiscriptionTV" destination="70X-3T-J8V" id="N57-bx-mMI"/>
                 <outlet property="eventNameLabel" destination="bgu-qq-Sxp" id="wm0-ye-1po"/>
                 <outlet property="goButton" destination="pJB-xJ-Fam" id="n9J-oK-HBj"/>
+                <outlet property="infoLabel" destination="L2C-cc-yhV" id="WIl-Rf-ffF"/>
                 <outlet property="nickNameLabel" destination="gAm-ic-PTa" id="2uC-YR-LDg"/>
+                <outlet property="removeButton" destination="w5u-QT-dvb" id="voM-zC-gut"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -69,10 +71,10 @@
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no"/>
                         </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание мероприятия:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-cc-yhV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-cc-yhV">
                             <rect key="frame" x="0.0" y="473" width="355" height="24"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                            <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJB-xJ-Fam">
@@ -97,10 +99,23 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Закрыть">
-                        <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" red="0.0" green="0.32479163122694288" blue="0.0058868771330174135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="closeWindow" destination="-1" eventType="touchUpInside" id="nOw-bq-DdV"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-QT-dvb">
+                    <rect key="frame" x="242.5" y="617" width="112.5" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="LUL-iY-uzS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Удалить">
+                        <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="removeEventButtonTap" destination="-1" eventType="touchUpInside" id="1ZH-SM-YSX"/>
                     </connections>
                 </button>
             </subviews>
@@ -109,10 +124,13 @@
                 <constraint firstItem="u7Y-UQ-z9H" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="0d9-6T-aX8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="u7Y-UQ-z9H" secondAttribute="bottom" constant="20" id="6Rf-OQ-DFz"/>
                 <constraint firstItem="e6p-I8-Lcb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="6bP-y1-ZD3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="w5u-QT-dvb" secondAttribute="trailing" constant="20" id="9eF-RF-txy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e6p-I8-Lcb" secondAttribute="trailing" constant="10" id="Fun-oA-QRb"/>
+                <constraint firstItem="w5u-QT-dvb" firstAttribute="centerY" secondItem="u7Y-UQ-z9H" secondAttribute="centerY" id="KKz-XT-3Zl"/>
                 <constraint firstItem="u7Y-UQ-z9H" firstAttribute="top" secondItem="e6p-I8-Lcb" secondAttribute="bottom" constant="50" id="VAo-qa-vBz"/>
                 <constraint firstItem="u7Y-UQ-z9H" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="cCy-QD-grE"/>
                 <constraint firstItem="e6p-I8-Lcb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="eX8-H6-GJM"/>
+                <constraint firstItem="w5u-QT-dvb" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="jmr-jJ-0Q6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="131.78410794602701"/>

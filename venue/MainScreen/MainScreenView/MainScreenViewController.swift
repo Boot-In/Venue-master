@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import Foundation
 
 class MainScreenViewController: UIViewController {
     
@@ -27,25 +26,39 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
-        markerButton.isHidden = true
+        ModuleBulder.mainScreenConfigure(view: self)
         intervalSC.selectedSegmentIndex = 2
+        presenter.startLocationService()
+        DispatchQueue.main.async {
+            self.presenter.checkUserLoginStatus()
+        }
+        markerButton.isHidden = true
         intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
         intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
-        ModuleBulder.mainScreenConfigure(view: self)
         navigationController?.navigationBar.isHidden = true
         sliderSetup()
-        presenter.startLocationService()
         mapViewSetup()
-        presenter.checkUserLoginStatus()
+        print("старт маркеров на карту")
+        
+        presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("viewWillAppear")
         checkAccount()
+       // presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
         if isMark {
             mapView.clear()
+            print("Карта очищена")
             presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NetworkService.stopObservers()
     }
 
     func checkAccount() {

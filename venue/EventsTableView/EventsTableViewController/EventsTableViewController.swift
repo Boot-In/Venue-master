@@ -75,6 +75,12 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        DataService.shared.event = eventsFiltred[indexPath.row]
+        DataService.shared.eventID = eventsFiltred[indexPath.row].eventID
+        presenter.goToEventScreen()
+    }
+    
 }
 
 extension EventsTableViewController: UISearchBarDelegate {
@@ -84,7 +90,6 @@ extension EventsTableViewController: UISearchBarDelegate {
         if searchText.isEmpty == false {
             eventsFiltred = events.filter({ $0.nameEvent.lowercased().contains(searchText.lowercased()) })
         }
-        
         eventsTableView.reloadData()
     }
 }

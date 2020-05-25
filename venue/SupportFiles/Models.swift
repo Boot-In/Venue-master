@@ -7,6 +7,7 @@
 //
 
 import GoogleMaps
+import Firebase
 
 struct Event {
     let userID: String
@@ -22,6 +23,7 @@ struct Event {
     var iconEvent: String = "marker-icon"
     var lifeTimeEvent: Double = 1
     var followEventUsers: [String] = []
+    let ref: DatabaseReference?
     
     init(userID: String, userNick: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
         self.userID = userID
@@ -30,21 +32,24 @@ struct Event {
         self.latEvent = coordinate.latitude
         self.lngEvent = coordinate.longitude
         self.dateEventTI = date.timeIntervalSince1970
+        self.ref = nil
     }
-    //    init(snapshot: DataSnapshot) {
-    //        let snapshotValue = snapshot.value as! [String: AnyObject]
-    //        userID = snapshotValue["userID"] as! String
-    //        nameEvent = snapshotValue["nameEvent"] as! String
-    //        latEvent = snapshotValue["latEvent"] as! Double
-    //        lngEvent = snapshotValue["lngEvent"] as! Double
-    //        dateEventString = snapshotValue["dateEventString"] as! String
-    //        dateEventTI = snapshotValue["dateEventTI"] as! Double
-    //        snipetEvent = snapshotValue["snipetEvent"] as! String
-    //        discriptionEvent = snapshotValue["discriptionEvent"] as! String
-    //        iconEvent = snapshotValue["iconEvent"] as! String
-    //        lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
-    //        ref = snapshot.ref
-    //    }
+        init(snapshot: DataSnapshot) {
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            userID = snapshotValue["userID"] as! String
+            userNick = snapshotValue["userNick"] as! String
+            nameEvent = snapshotValue["nameEvent"] as! String
+            latEvent = snapshotValue["latEvent"] as! Double
+            lngEvent = snapshotValue["lngEvent"] as! Double
+            dateEventTI = snapshotValue["dateEventTI"] as! Double
+            eventID = snapshotValue["eventID"] as! String
+            dateEventString = snapshotValue["dateEventString"] as! String
+            snipetEvent = snapshotValue["snipetEvent"] as! String
+            discriptionEvent = snapshotValue["discriptionEvent"] as! String
+            iconEvent = snapshotValue["iconEvent"] as! String
+            lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
+            ref = snapshot.ref
+        }
 }
 
 struct Profile {

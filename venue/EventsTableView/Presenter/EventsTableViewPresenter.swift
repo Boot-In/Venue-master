@@ -16,6 +16,7 @@ protocol EventsTableViewPresenterProtocol: class {
     init(view: EventsTableViewProtocol, router: EventsTableViewRouterProtocol)
     
     func markerFiltred(range: Int) -> [Event]
+    func goToEventScreen()
 }
 
 class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
@@ -51,5 +52,10 @@ class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
         print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
         return eventsFiltred
     }
+    
+    func goToEventScreen() {
+        router.showEventScreen()
+    }
+    
     
 }

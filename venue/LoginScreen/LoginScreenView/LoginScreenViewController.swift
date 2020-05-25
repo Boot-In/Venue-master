@@ -24,12 +24,6 @@ class LoginScreenViewController: UIViewController {
         warnLabel.alpha = 0
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-//        if UserDefaults.standard.bool(forKey: "logined") {
-//            self.dismiss(animated: false)
-//        }
-    }
     
     func displayWarningLabel(withText text: String) {
         warnLabel.text = text
@@ -65,7 +59,6 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func backButtonTap() {
-       // navigationController?.popToRootViewController(animated: true)
         self.dismiss(animated: true)
     }
     
@@ -74,7 +67,6 @@ class LoginScreenViewController: UIViewController {
 
 extension LoginScreenViewController: LoginScreenProtocol {
     
-
 
     
 }

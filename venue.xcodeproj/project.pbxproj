@@ -40,6 +40,7 @@
 		1BECD6FB246799100000A0C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BECD6FA246799100000A0C6 /* Assets.xcassets */; };
 		1BECD6FE246799100000A0C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BECD6FC246799100000A0C6 /* LaunchScreen.storyboard */; };
 		1BECD70A24679D490000A0C6 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECD70924679D490000A0C6 /* LocationService.swift */; };
+		1BF4E1A0247A85850027F8A9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4E19F247A85850027F8A9 /* NetworkService.swift */; };
 		8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE056A12473FE3B00D94CCC /* DataService.swift */; };
 		8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */; };
 		ADFA0E2C23AEF3D819F393E1 /* Pods_venue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6416475AA159C63D9D3B08E /* Pods_venue.framework */; };
@@ -81,6 +82,7 @@
 		1BECD6FD246799100000A0C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BECD6FF246799100000A0C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BECD70924679D490000A0C6 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		1BF4E19F247A85850027F8A9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8BE056A12473FE3B00D94CCC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A46DD4D347AF479F222570F1 /* Pods-venue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-venue.release.xcconfig"; path = "Target Support Files/Pods-venue/Pods-venue.release.xcconfig"; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			children = (
 				1BECD70924679D490000A0C6 /* LocationService.swift */,
 				8BE056A12473FE3B00D94CCC /* DataService.swift */,
+				1BF4E19F247A85850027F8A9 /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				1BE688CE2467E0BE00F641F2 /* MainScreenRouter.swift in Sources */,
 				1BE688CC2467DFFC00F641F2 /* ModuleBuilder.swift in Sources */,
 				1BECD6F42467990C0000A0C6 /* SceneDelegate.swift in Sources */,
+				1BF4E1A0247A85850027F8A9 /* NetworkService.swift in Sources */,
 				1B48450724713CB300836FB5 /* LoginScreenRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

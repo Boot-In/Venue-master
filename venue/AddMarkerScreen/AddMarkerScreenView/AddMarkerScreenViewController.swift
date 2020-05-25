@@ -23,9 +23,16 @@ class AddMarkerScreenViewController: UIViewController {
     let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
     var i = 0
     
+    let formatter = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isHidden = false
+        
+        formatter.locale = .init(identifier: "Russian")
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .red
         loadDataForTextField()
@@ -55,8 +62,12 @@ class AddMarkerScreenViewController: UIViewController {
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "nickNameUser") ?? "без названия")"
+        let stringDate = formatter.string(from: Date())
         nameEventTF.text = DataService.shared.placeEvent
         iconEventIV.image = UIImage(named: iconArray[i])
+        dateEventTF.text = stringDate
+        DataService.shared.dateEvent = Date()
+        DataService.shared.dataEventString = stringDate
     }
     
     func createDatePicker() {
@@ -64,6 +75,7 @@ class AddMarkerScreenViewController: UIViewController {
         toolbar.sizeToFit()
         
         let done = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector(donePressed))
+        //done.title = "Готово"
         toolbar.setItems([done], animated: true)
         
         dateEventTF.inputAccessoryView = toolbar // вызов тулбара
@@ -73,10 +85,10 @@ class AddMarkerScreenViewController: UIViewController {
     }
     
     @objc func donePressed() {
-        let formatter = DateFormatter()
-        formatter.locale = .init(identifier: "Russian")
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
+//        let formatter = DateFormatter()
+//        formatter.locale = .init(identifier: "Russian")
+//        formatter.dateStyle = .short
+//        formatter.timeStyle = .none
         
         let dateString = formatter.string(from: picker.date)
         DataService.shared.dateEvent = picker.date
