@@ -24,6 +24,7 @@ class NetworkService {
         let ref = Database.database().reference()
         let eventRef = ref.child("events").child(event.eventID)
         eventRef.removeValue()
+        print("Event removed!")
     }
     
     static func removeOldEvent(eventsID: [String]) {
@@ -55,6 +56,18 @@ class NetworkService {
         //            print(error.localizedDescription)
         //        }
     }
+    
+//    static func loadFollowUserEvents() {
+//        let ref = Database.database().reference().child("events")
+//        ref.observe(.value, with: { (snapshot) in
+//            for item in snapshot.children {
+//
+//                let snapshotValue = snapshot.value as! [String: AnyObject]
+//                let userID = snapshotValue["userID"] as! String
+//
+//            }
+//        })
+//    }
         
     static func loadMyProfile (userId: String) {
         print("loadMyProfile>userId>",userId)
@@ -84,6 +97,16 @@ class NetworkService {
         let update = ["\(localUser.userID)": localUser.niсkNameUser]
         eventRefKey.updateChildValues(update)
         print("save Follow Event Complete !")
+    }
+    
+    static func removeFollow() {
+        let eventID = DataService.shared.eventID
+        guard let localUser = DataService.shared.localUser else { return }
+        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+        let ref = Database.database().reference()
+        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
+        eventRefKey.removeValue()
+        print("Follow removed!")
     }
     
     

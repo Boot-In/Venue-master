@@ -21,6 +21,7 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var cancelFollowButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +32,17 @@ class EventScreenViewController: UIViewController {
         presenter.loadEventInfo(event: event )
         } else { presenter.markerToEvent() }
         
+        /// добавить отображение ОДНОЙ кнопки.
+        
     }
 
-  
+    @IBAction func cancelFollowAction() {
+        NetworkService.removeFollow()
+        goButton.isHidden = false
+        cancelFollowButton.isHidden = true
+        displayWarningLabel(withText: "Жаль, что передумали ...")
+    }
+    
 
     @IBAction func closeWindow() {
         DataService.shared.event = nil
@@ -50,6 +59,8 @@ class EventScreenViewController: UIViewController {
     @IBAction func goButtonTap() {
         NetworkService.followMe()
         displayWarningLabel(withText: "Ваш голос принят !")
+        goButton.isHidden = true
+        cancelFollowButton.isHidden = false
     }
     
     func animeOffLabel() {

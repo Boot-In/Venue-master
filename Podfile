@@ -12,6 +12,6 @@ target 'venue' do
   pod 'Firebase'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
-  pod 'SwiftyJSON', '~> 4.0'
+# pod 'SwiftyJSON', '~> 4.0'
     
 end
