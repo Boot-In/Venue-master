@@ -67,4 +67,13 @@ class ModuleBulder: Builder {
         view.presenter = presenter
         return view
     }
+    
+    static func addCategoryTableViewScreen() -> CategoryTableViewController {
+        let view = CategoryTableViewController()
+        let router = CategoryTableViewRouter(with: view)
+        let presenter = CategoryTableViewPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
+    }
+    
 }

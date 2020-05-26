@@ -20,6 +20,12 @@
 		1B4EB4AE2476111D002BA2C8 /* EventScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */; };
 		1B4EB4B024761175002BA2C8 /* EventScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */; };
 		1B57BC84247CA448000BD8B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC83247CA448000BD8B7 /* Extensions.swift */; };
+		1B57BC8A247CE490000BD8B7 /* CategoryTableViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC89247CE490000BD8B7 /* CategoryTableViewPresenter.swift */; };
+		1B57BC8C247CE4AE000BD8B7 /* CategoryTableViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC8B247CE4AE000BD8B7 /* CategoryTableViewRouter.swift */; };
+		1B57BC8F247CE4DF000BD8B7 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC8D247CE4DF000BD8B7 /* CategoryTableViewController.swift */; };
+		1B57BC90247CE4DF000BD8B7 /* CategoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B57BC8E247CE4DF000BD8B7 /* CategoryTableViewController.xib */; };
+		1B57BC93247CE802000BD8B7 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC91247CE802000BD8B7 /* CategoryCell.swift */; };
+		1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B57BC92247CE802000BD8B7 /* CategoryCell.xib */; };
 		1B5B7022246826A7004CA039 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7021246826A7004CA039 /* Models.swift */; };
 		1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */; };
 		1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */; };
@@ -61,6 +67,12 @@
 		1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenPresenter.swift; sourceTree = "<group>"; };
 		1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenRouter.swift; sourceTree = "<group>"; };
 		1B57BC83247CA448000BD8B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1B57BC89247CE490000BD8B7 /* CategoryTableViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewPresenter.swift; sourceTree = "<group>"; };
+		1B57BC8B247CE4AE000BD8B7 /* CategoryTableViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewRouter.swift; sourceTree = "<group>"; };
+		1B57BC8D247CE4DF000BD8B7 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		1B57BC8E247CE4DF000BD8B7 /* CategoryTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewController.xib; sourceTree = "<group>"; };
+		1B57BC91247CE802000BD8B7 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		1B57BC92247CE802000BD8B7 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		1B5B7021246826A7004CA039 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenViewController.swift; sourceTree = "<group>"; };
 		1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMarkerScreenViewController.xib; sourceTree = "<group>"; };
@@ -189,6 +201,43 @@
 				1B48450624713CB300836FB5 /* LoginScreenRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		1B57BC85247CE425000BD8B7 /* CategoryTableView */ = {
+			isa = PBXGroup;
+			children = (
+				1B57BC88247CE46E000BD8B7 /* Presenter */,
+				1B57BC87247CE464000BD8B7 /* Router */,
+				1B57BC86247CE441000BD8B7 /* CategoryTableViewController */,
+			);
+			path = CategoryTableView;
+			sourceTree = "<group>";
+		};
+		1B57BC86247CE441000BD8B7 /* CategoryTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B57BC8D247CE4DF000BD8B7 /* CategoryTableViewController.swift */,
+				1B57BC8E247CE4DF000BD8B7 /* CategoryTableViewController.xib */,
+				1B57BC91247CE802000BD8B7 /* CategoryCell.swift */,
+				1B57BC92247CE802000BD8B7 /* CategoryCell.xib */,
+			);
+			path = CategoryTableViewController;
+			sourceTree = "<group>";
+		};
+		1B57BC87247CE464000BD8B7 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				1B57BC8B247CE4AE000BD8B7 /* CategoryTableViewRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		1B57BC88247CE46E000BD8B7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B57BC89247CE490000BD8B7 /* CategoryTableViewPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		1B8E09F324694238001C5E01 /* AddMarkerScreen */ = {
@@ -335,6 +384,7 @@
 		1BECD6F02467990C0000A0C6 /* venue */ = {
 			isa = PBXGroup;
 			children = (
+				1B57BC85247CE425000BD8B7 /* CategoryTableView */,
 				1B95A08624777B4D00CCBE9F /* EventsTableView */,
 				1BC3C00124752FFB00A2F775 /* EventScreen */,
 				1BECD706246799750000A0C6 /* MainScreen */,
@@ -460,8 +510,10 @@
 				1BECD6FE246799100000A0C6 /* LaunchScreen.storyboard in Resources */,
 				1BECD6FB246799100000A0C6 /* Assets.xcassets in Resources */,
 				1BECD6F92467990C0000A0C6 /* Main.storyboard in Resources */,
+				1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */,
 				1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */,
 				8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */,
+				1B57BC90247CE4DF000BD8B7 /* CategoryTableViewController.xib in Resources */,
 				1B4EB4AC247610CC002BA2C8 /* EventScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,10 +588,12 @@
 				1B57BC84247CA448000BD8B7 /* Extensions.swift in Sources */,
 				1B01EC872468D45E00FA52F1 /* AccountScreenPresenter.swift in Sources */,
 				1B01EC892468D47200FA52F1 /* AccountScreenRouter.swift in Sources */,
+				1B57BC93247CE802000BD8B7 /* CategoryCell.swift in Sources */,
 				1B95A08B24777BCB00CCBE9F /* EventsTableViewRouter.swift in Sources */,
 				1B95A08D24777BE300CCBE9F /* EventsTableViewPresenter.swift in Sources */,
 				1BECD6F62467990C0000A0C6 /* MainScreenViewController.swift in Sources */,
 				1B8E09FE246942CC001C5E01 /* AddMarkerScreenPresenter.swift in Sources */,
+				1B57BC8A247CE490000BD8B7 /* CategoryTableViewPresenter.swift in Sources */,
 				1B4EB4B024761175002BA2C8 /* EventScreenRouter.swift in Sources */,
 				1B95A0962477805000CCBE9F /* EventTableViewCell.swift in Sources */,
 				1B01EC822468D40800FA52F1 /* AccountScreenViewController.swift in Sources */,
@@ -548,7 +602,9 @@
 				1B4EB4AB247610CC002BA2C8 /* EventScreenViewController.swift in Sources */,
 				1B8E09FC246942BA001C5E01 /* AddMarkerScreenRouter.swift in Sources */,
 				8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */,
+				1B57BC8F247CE4DF000BD8B7 /* CategoryTableViewController.swift in Sources */,
 				1B95A09024777BF800CCBE9F /* EventsTableViewController.swift in Sources */,
+				1B57BC8C247CE4AE000BD8B7 /* CategoryTableViewRouter.swift in Sources */,
 				1B4EB4AE2476111D002BA2C8 /* EventScreenPresenter.swift in Sources */,
 				1B48450224713C8700836FB5 /* LoginScreenViewController.swift in Sources */,
 				1BE688D12467E0F100F641F2 /* MainScreenPresenter.swift in Sources */,
