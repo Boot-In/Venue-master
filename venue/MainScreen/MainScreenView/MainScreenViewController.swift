@@ -40,7 +40,9 @@ class MainScreenViewController: UIViewController {
         mapViewSetup()
         print("старт маркеров на карту")
         
-        presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
+        presenter.getMarkers(range:  intervalSC.selectedSegmentIndex)
+        
+        print("NetworkService>defaultZoom>",NetworkService.shared.defaultZoom)
     }
     
     
@@ -52,7 +54,7 @@ class MainScreenViewController: UIViewController {
         if isMark {
             mapView.clear()
             print("Карта очищена")
-            presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
+            presenter.getMarkers(range:  intervalSC.selectedSegmentIndex)
         }
     }
     
@@ -88,7 +90,7 @@ class MainScreenViewController: UIViewController {
     
     @IBAction func rangeSCaction(_ sender: UISegmentedControl) {
         mapView.clear()
-        presenter.markerFiltred(range: sender.selectedSegmentIndex)
+        presenter.getMarkers(range:  intervalSC.selectedSegmentIndex)
     }
     
     @IBAction func zoomSliderAction(_ sender: UISlider) {
@@ -143,7 +145,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker(position: coordinate)
         mapView.clear()
-        presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
+        presenter.getMarkers(range:  intervalSC.selectedSegmentIndex)
         isMark = true
         DataService.shared.markerDidTapped = false
         updateMarkerButton()

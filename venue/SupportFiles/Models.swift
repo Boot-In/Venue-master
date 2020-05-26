@@ -22,7 +22,7 @@ struct Event {
     var discriptionEvent: String = ""
     var iconEvent: String = "marker-icon"
     var lifeTimeEvent: Double = 1
-    var followEventUsers: [String] = []
+    var followEventUsers = [String: String]()
     let ref: DatabaseReference?
     
     init(userID: String, userNick: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
@@ -48,9 +48,22 @@ struct Event {
             discriptionEvent = snapshotValue["discriptionEvent"] as! String
             iconEvent = snapshotValue["iconEvent"] as! String
             lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
+            
+//            let userNick = snapshotValue["userNick"] as! [String: AnyObject]
+//            let surname = userNick["surname"]  as! [String: AnyObject]
+//            let rfgtfg = sur
+     
+            if snapshotValue["followEventUsers"] != nil {
+                followEventUsers = snapshotValue["followEventUsers"] as! [String: String]
+                //followEventUsers = snapshotValue["followEventUsers"] as! [String: AnyObject]
+            
+                print("name>",nameEvent,">  followEventUsers>", followEventUsers, "count>", followEventUsers.count)
+            }
+            
             ref = snapshot.ref
         }
 }
+
 
 struct Profile {
     let userID: String

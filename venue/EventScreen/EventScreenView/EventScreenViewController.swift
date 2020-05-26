@@ -30,6 +30,12 @@ class EventScreenViewController: UIViewController {
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false
         if let event = DataService.shared.event {
+            print("...viewDidLoad")
+            print("...event>count>", event.followEventUsers.count)
+            
+            for obj in event.followEventUsers {
+                print("key>",obj.key, "   value>", obj.value)
+            }
         presenter.loadEventInfo(event: event )
         } else { presenter.markerToEvent() }
         

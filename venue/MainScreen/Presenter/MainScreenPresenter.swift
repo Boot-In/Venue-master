@@ -26,7 +26,7 @@ protocol MainScreenPresenterProtocol: class {
     func goToEventTableView()
     func checkUserLoginStatus()
     func checkUserStatus()
-    func markerFiltred(range: Int)
+    func getMarkers(range: Int)
 }
 
 class MainScreenPresenter: MainScreenPresenterProtocol {
@@ -120,11 +120,15 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         view.setMarkers(markers: markers)
     }
     
-    func markerFiltred(range: Int) {
-        DispatchQueue.main.async {
-            NetworkService.loadAllEvents()
-        }
-        let events = DataService.shared.events
+    func getMarkers(range: Int) {
+        NetworkService.loadAllEvents(completion: { list, success in
+            if success {
+                self.markerFiltred(events: list, range: range)
+            }
+        })
+    }
+    
+    func markerFiltred(events: [Event],range: Int) {
         print("В исходном массиве = \(events.count) элементов")
         var eventsFiltred:[Event] = []
         eventsFiltred.removeAll()

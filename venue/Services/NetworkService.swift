@@ -13,6 +13,7 @@ import GoogleMaps
 class NetworkService {
     static let shared = NetworkService()
     
+    var defaultZoom: Int = 20
     
     static func stopObservers(){
         let ref = Database.database().reference()
@@ -86,27 +87,31 @@ class NetworkService {
             eventRef.removeValue()
         }
     }
+
     
-    static func loadAllEvents() {
+    static func loadAllEvents( completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")
         var eventsFromNet = [Event]()
         DataService.shared.events.removeAll()
+        
         ref.observe(.value, with: { (snapshot) in
             for item in snapshot.children {
                 let event = Event(snapshot: item as! DataSnapshot)
-               // print("item = ", item)
-               // print("EventID = ", event.eventID)
+                // print("item = ", item)
+                // print("EventID = ", event.eventID)
                 eventsFromNet.append(event) 
             }
             DataService.shared.events = eventsFromNet
             print("загружено \(eventsFromNet.count) элементов")
             print("Элементы помещены в массив \(DataService.shared.events.count)")
-        })
-        //        { (error) in
-        //            print(error.localizedDescription)
-        //        }
+            completion(eventsFromNet, true)
+        }) { (error) in
+            print(error.localizedDescription)
+            completion(eventsFromNet, false)
+        }
     }
+    
     
 //    static func loadFollowUserEvents() {
 //        let ref = Database.database().reference().child("events")
