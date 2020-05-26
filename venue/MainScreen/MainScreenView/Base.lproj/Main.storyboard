@@ -32,7 +32,7 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fDf-HW-xTV">
                                         <rect key="frame" x="50" y="0.0" width="245" height="31"/>
                                         <segments>
-                                            <segment title="Сегодня">
+                                            <segment title="День">
                                                 <size key="contentOffset" width="1" height="1"/>
                                             </segment>
                                             <segment title="Неделя"/>

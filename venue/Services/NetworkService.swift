@@ -26,6 +26,57 @@ class NetworkService {
         eventRef.removeValue()
         print("Event removed!")
     }
+    static func saveNewEvent(event: Event) {
+        func getEventID() -> String {
+            var iD = ""
+            iD += String(event.userID[event.userID.startIndex]).lowercased()
+            iD += String(Int(event.dateEventTI))
+            iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
+            iD += String(event.nameEvent.count)
+            iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
+            return iD
+        }
+        let ref = Database.database().reference()
+        let eventRef = ref.child("events").child(getEventID())
+        eventRef.setValue([
+            "userID" : event.userID,
+            "eventID" : getEventID(),
+            "userNick": event.userNick,
+            "nameEvent" : event.nameEvent,
+            "latEvent" : event.latEvent,
+            "lngEvent" : event.lngEvent,
+            "dateEventString" : event.dateEventString,
+            "dateEventTI" : event.dateEventTI,
+            "snipetEvent" : event.snipetEvent,
+            "discriptionEvent" : event.discriptionEvent,
+            "iconEvent" : event.iconEvent,
+            "lifeTimeEvent" : event.lifeTimeEvent
+        ])
+        print("saveEvent Complete !")
+        print("EventID = \(getEventID())")
+    }
+    
+    static func updateEvent(event: Event) {
+        let ref = Database.database().reference()
+        let eventRef = ref.child("events").child(event.eventID)
+        eventRef.updateChildValues([
+            "userID" : event.userID,
+            "eventID" : event.eventID,
+            "userNick": event.userNick,
+            "nameEvent" : event.nameEvent,
+            "latEvent" : event.latEvent,
+            "lngEvent" : event.lngEvent,
+            "dateEventString" : event.dateEventString,
+            "dateEventTI" : event.dateEventTI,
+            "snipetEvent" : event.snipetEvent,
+            "discriptionEvent" : event.discriptionEvent,
+            "iconEvent" : event.iconEvent,
+            "lifeTimeEvent" : event.lifeTimeEvent
+        ])
+        print("saveUpdateEvent Complete !")
+        print("EventID = \(event.eventID)")
+    }
+
     
     static func removeOldEvent(eventsID: [String]) {
         print("Запущен процесс удаления старых событий")
@@ -45,7 +96,7 @@ class NetworkService {
             for item in snapshot.children {
                 let event = Event(snapshot: item as! DataSnapshot)
                // print("item = ", item)
-                print("EventID = ", event.eventID)
+               // print("EventID = ", event.eventID)
                 eventsFromNet.append(event) 
             }
             DataService.shared.events = eventsFromNet

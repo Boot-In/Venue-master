@@ -7,8 +7,8 @@
 //
 
 protocol EventScreenRouterProtocol: class {
-
-  
+    
+    func showAddMarkerScreen()
 }
 
 final class EventScreenRouter: EventScreenRouterProtocol {
@@ -20,12 +20,12 @@ final class EventScreenRouter: EventScreenRouterProtocol {
         self.view = vc
     }
     
-//func showAccountScreen() {
-//    let accountScreenVC = ModuleBulder.accountScreen()
-//    view?.navigationController?.pushViewController(accountScreenVC, animated: true)
-//   // accountScreenVC.modalPresentationStyle = .fullScreen
-//   // view?.present(accountScreenVC, animated: true)
-//}
+    func showAddMarkerScreen() {
+        let addMarkerScreenVC = ModuleBulder.addMarkerScreen()
+        addMarkerScreenVC.modalPresentationStyle = .fullScreen
+        addMarkerScreenVC.isEdit = true
+        view?.present(addMarkerScreenVC, animated: true)
+    }
     
    
 }

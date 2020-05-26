@@ -22,6 +22,7 @@ class AddMarkerScreenViewController: UIViewController {
     let picker = UIDatePicker()
     let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
     var i = 0
+    var isEdit: Bool = false // true - для режима редактирования
     
     let formatter = DateFormatter()
     
@@ -32,11 +33,13 @@ class AddMarkerScreenViewController: UIViewController {
         formatter.locale = .init(identifier: "Russian")
         formatter.dateStyle = .short
         formatter.timeStyle = .none
-        
+        enableTextField()
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .red
         createDatePicker()
-        loadDataForTextField()
+        addDoneButtonTo(nameEventTF, categoryEventTF)
+        addDoneButtonToTV(discriptionEventTV)
+        loadTextFieldFromEvent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,8 +63,24 @@ class AddMarkerScreenViewController: UIViewController {
           (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
        }
     
+    func disableTextField() {
+        dateEventTF.isEnabled = false
+        nameEventTF.isEnabled = false
+        categoryEventTF.isEnabled = false
+        discriptionEventTV.isSelectable = false
+    }
+    
+    func enableTextField() {
+          dateEventTF.isEnabled = true
+          nameEventTF.isEnabled = true
+          categoryEventTF.isEnabled = true
+          discriptionEventTV.isSelectable = true
+      }
+    
     func loadTextFieldFromEvent() {
-       // presenter.
+        if let event = DataService.shared.event {
+            presenter.loadTFFromEvent(event: event)
+        } else { loadDataForTextField() }
     }
     
     func loadDataForTextField() {
@@ -79,9 +98,10 @@ class AddMarkerScreenViewController: UIViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let done = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector(donePressed))
-        //done.title = "Готово"
-        toolbar.setItems([done], animated: true)
+        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressed))
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+        target: nil, action: nil)
+        toolbar.setItems([flexBarButton, done], animated: true)
         
         dateEventTF.inputAccessoryView = toolbar // вызов тулбара
         dateEventTF.inputView = picker
@@ -99,6 +119,7 @@ class AddMarkerScreenViewController: UIViewController {
     }
     
     @IBAction func closeButtonTap() {
+        isEdit = false
         self.dismiss(animated: true)
     }
     
@@ -119,9 +140,16 @@ class AddMarkerScreenViewController: UIViewController {
         DataService.shared.categoryEvent = categoryEventTF.text ?? ""
         infoLabel.textColor = .systemBlue
         infoLabel.text = "Сохраняем ...."
-        presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
-        infoLabel.text = "Данные успешно сохранены"
+        if isEdit {
+            guard let event = DataService.shared.event else { return }
+            presenter.updateEvent(event: event, nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
+            infoLabel.text = "Данные успешно обновлены"
+        } else {
+            presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
+            infoLabel.text = "Данные успешно сохранены"
+        }
         saveButton.isHidden = true
+        disableTextField()
     }
     
     
@@ -137,12 +165,14 @@ class AddMarkerScreenViewController: UIViewController {
 extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     
     func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String) {
-        
+        for ico in 0..<iconArray.count {
+            if iconArray[ico] == icon { i = ico }
+        }
         userNickLabel.text = "Организатор: \(nik)"
         nameEventTF.text = name
         dateEventTF.text = formatter.string(from: Date())
         categoryEventTF.text = caregiry
-        iconEventIV.image = UIImage(named: icon)
+        iconEventIV.image = UIImage(named: iconArray[i])
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
         DataService.shared.dateEvent = Date()
@@ -155,6 +185,51 @@ extension AddMarkerScreenViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
       self.view.endEditing(true) // Скрывает клавиатуру по Enter
+    }
+    
+}
+
+extension AddMarkerScreenViewController {
+    
+    // Метод для отображения кнопки "Готово" на клавиатуре
+    private func addDoneButtonTo(_ textFields: UITextField...) {
+        
+        textFields.forEach { textField in
+            let keyboardToolbar = UIToolbar()
+            textField.inputAccessoryView = keyboardToolbar
+            keyboardToolbar.sizeToFit()
+            
+            let doneButton = UIBarButtonItem(title:"Готово",
+                                             style: .done,
+                                             target: self,
+                                             action: #selector(didTapDone))
+            
+            let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            
+            keyboardToolbar.items = [flexBarButton, doneButton]
+        }
+    }
+    
+    private func addDoneButtonToTV(_ textView: UITextView...) {
+         
+         textView.forEach { textView in
+             let keyboardToolbar = UIToolbar()
+             textView.inputAccessoryView = keyboardToolbar
+             keyboardToolbar.sizeToFit()
+             
+             let doneButton = UIBarButtonItem(title:"Готово",
+                                              style: .done,
+                                              target: self,
+                                              action: #selector(didTapDone))
+             
+             let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+             
+             keyboardToolbar.items = [flexBarButton, doneButton]
+         }
+     }
+    
+    @objc private func didTapDone() {
+        view.endEditing(true)
     }
     
 }

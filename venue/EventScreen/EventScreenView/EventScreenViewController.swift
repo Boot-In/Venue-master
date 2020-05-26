@@ -23,6 +23,7 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var cancelFollowButton: UIButton!
     
+    @IBOutlet weak var editButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,8 +34,16 @@ class EventScreenViewController: UIViewController {
         } else { presenter.markerToEvent() }
         
         /// добавить отображение ОДНОЙ кнопки.
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let event = DataService.shared.event {
+            presenter.loadEventInfo(event: event )
+        }
+    }
+    
+    
 
     @IBAction func cancelFollowAction() {
         NetworkService.removeFollow()
@@ -49,6 +58,9 @@ class EventScreenViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    @IBAction func editButtonAction() {
+        presenter.goToEdit()
+    }
     
     @IBAction func removeEventButtonTap() {
         guard let event = DataService.shared.event else { return }
@@ -99,8 +111,10 @@ extension EventScreenViewController: EventScreenProtocol {
     func removeButtonSetting(hide: Bool) {
         if hide {
             removeButton.isHidden = true
+            editButton.isHidden = true
         } else {
             removeButton.isHidden = false
+            editButton.isHidden = false
         }
     }
     

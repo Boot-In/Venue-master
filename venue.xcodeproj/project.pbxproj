@@ -19,6 +19,7 @@
 		1B4EB4AC247610CC002BA2C8 /* EventScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AA247610CC002BA2C8 /* EventScreenViewController.xib */; };
 		1B4EB4AE2476111D002BA2C8 /* EventScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */; };
 		1B4EB4B024761175002BA2C8 /* EventScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */; };
+		1B57BC84247CA448000BD8B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC83247CA448000BD8B7 /* Extensions.swift */; };
 		1B5B7022246826A7004CA039 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7021246826A7004CA039 /* Models.swift */; };
 		1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */; };
 		1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */; };
@@ -59,6 +60,7 @@
 		1B4EB4AA247610CC002BA2C8 /* EventScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventScreenViewController.xib; sourceTree = "<group>"; };
 		1B4EB4AD2476111D002BA2C8 /* EventScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenPresenter.swift; sourceTree = "<group>"; };
 		1B4EB4AF24761175002BA2C8 /* EventScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScreenRouter.swift; sourceTree = "<group>"; };
+		1B57BC83247CA448000BD8B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1B5B7021246826A7004CA039 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenViewController.swift; sourceTree = "<group>"; };
 		1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMarkerScreenViewController.xib; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				1BECD6FC246799100000A0C6 /* LaunchScreen.storyboard */,
 				1BE688CB2467DFFC00F641F2 /* ModuleBuilder.swift */,
 				1B5B7021246826A7004CA039 /* Models.swift */,
+				1B57BC83247CA448000BD8B7 /* Extensions.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */,
+				1B57BC84247CA448000BD8B7 /* Extensions.swift in Sources */,
 				1B01EC872468D45E00FA52F1 /* AccountScreenPresenter.swift in Sources */,
 				1B01EC892468D47200FA52F1 /* AccountScreenRouter.swift in Sources */,
 				1B95A08B24777BCB00CCBE9F /* EventsTableViewRouter.swift in Sources */,

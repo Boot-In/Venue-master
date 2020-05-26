@@ -21,6 +21,7 @@ protocol AddMarkerScreenPresenterProtocol: class {
     init(view: AddMarkerScreenProtocol, router: AddMarkerScreenRouterProtocol)
     
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String)
+    func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String)
     func loadTFFromEvent(event: Event)
 }
 
@@ -53,34 +54,30 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.snipetEvent = DataService.shared.categoryEvent
         /// DataService.shared.events.append(event)  ????
         /// Сохранение
-        let ref = Database.database().reference()
-        let eventRef = ref.child("events").child(getEventID(event))
-        eventRef.setValue([
-            "userID" : event.userID,
-            "eventID" : getEventID(event),
-            "userNick": event.userNick,
-            "nameEvent" : event.nameEvent,
-            "latEvent" : event.latEvent,
-            "lngEvent" : event.lngEvent,
-            "dateEventString" : event.dateEventString,
-            "dateEventTI" : event.dateEventTI,
-            "snipetEvent" : event.snipetEvent,
-            "discriptionEvent" : event.discriptionEvent,
-            "iconEvent" : event.iconEvent,
-            "lifeTimeEvent" : event.lifeTimeEvent
-        ])
-        print("saveEvent Complete !")
-        print("EventID = \(getEventID(event))")
+        NetworkService.saveNewEvent(event: event)
+    }
+    
+    func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String) {
+        let date = DataService.shared.dateEvent
+        var eventUpd = event
+        eventUpd.dateEventString = DataService.shared.dataEventString
+        eventUpd.iconEvent = iconEvent
+        eventUpd.discriptionEvent = discrEvent
+        eventUpd.snipetEvent = DataService.shared.categoryEvent
+        eventUpd.dateEventTI = date.timeIntervalSince1970
+        /// Сохранение
+        NetworkService.updateEvent(event: eventUpd)
+        DataService.shared.event = eventUpd
     }
 
-    func getEventID(_ event: Event) -> String {
-        var iD = ""
-        iD += String(event.userID[event.userID.startIndex]).lowercased()
-        iD += String(Int(event.dateEventTI))
-        iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
-        iD += String(event.nameEvent.count)
-        iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
-        return iD
-    }
+//    func getEventID(_ event: Event) -> String {
+//        var iD = ""
+//        iD += String(event.userID[event.userID.startIndex]).lowercased()
+//        iD += String(Int(event.dateEventTI))
+//        iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
+//        iD += String(event.nameEvent.count)
+//        iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
+//        return iD
+//    }
 
 }

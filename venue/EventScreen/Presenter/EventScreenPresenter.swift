@@ -21,6 +21,7 @@ protocol EventScreenPresenterProtocol: class {
     
     func loadEventInfo(event: Event)
     func markerToEvent()
+    func goToEdit()
 
 }
 
@@ -68,6 +69,9 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         return events_.last
     }
     
+    func goToEdit() {
+        router.showAddMarkerScreen()
+    }
 //    func followMe() {
 //        let eventID = DataService.shared.eventID
 //        guard let localUser = DataService.shared.localUser else { return }

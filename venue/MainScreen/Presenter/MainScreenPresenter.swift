@@ -142,7 +142,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             if interval - event.dateEventTI > 0 && (event.dateEventTI + 80000 - today) > 0 {
                 eventsFiltred.append(event)
             }
-            if event.dateEventTI < today {
+            if event.dateEventTI + 86400 < today {
                 DataService.shared.oldEventsID?.append(event.eventID)
             }
         }

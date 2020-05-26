@@ -15,7 +15,7 @@ struct Event {
     let nameEvent: String
     let latEvent: Double
     let lngEvent: Double
-    let dateEventTI: Double
+    var dateEventTI: Double
     var eventID: String = ""
     var dateEventString: String = ""
     var snipetEvent: String = ""
